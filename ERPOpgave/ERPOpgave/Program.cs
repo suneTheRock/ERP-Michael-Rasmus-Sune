@@ -10,6 +10,10 @@ namespace ERPOpgave
     {
         static void Main(string[] args)
         {
+
+        }
+    }
+}
 //Kunde
 //Person
 //navn
@@ -49,6 +53,3 @@ namespace ERPOpgave
 //Kunde
 //Valuta
 //Kun til viderebygning: List<Ordrenummer>
-        }
-    }
-}
