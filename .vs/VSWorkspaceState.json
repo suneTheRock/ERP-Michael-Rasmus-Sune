@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ERPOpgave",
+    "\\ERPOpgave\\ERPOpgave",
+    "\\ERPOpgave\\ERPOpgave\\PersonalInfo"
   ],
-  "SelectedNode": "\\C:\\Users\\rasm639q\\Source\\Repos\\suneTheRock\\ERP-Michael-Rasmus-Sune",
+  "SelectedNode": "\\ERPOpgave\\ERPOpgave\\PersonalInfo\\Adress.cs",
   "PreviewInSolutionExplorer": false
 }
