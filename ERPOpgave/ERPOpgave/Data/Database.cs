@@ -4,9 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERPOpgave
+namespace ERPOpgave.Data
 {
-    internal class Database
+    public partial class Database
     {
+        public static Database Instance { get; private set; }
+        static  Database() 
+        {
+            Instance = new Database();
+        }
     }
 }
