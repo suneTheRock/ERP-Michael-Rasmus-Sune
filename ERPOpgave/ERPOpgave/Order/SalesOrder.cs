@@ -17,7 +17,7 @@ namespace ERPOpgave.Order
             }
         }
 
-        internal Orderline Orderline
+        internal List <Orderline> Orderlines
         {
             get => default;
             set
@@ -65,7 +65,7 @@ namespace ERPOpgave.Order
             }
         }
 
-        public int OrderNames
+        public int OrderNumber
         {
             get => default;
             set

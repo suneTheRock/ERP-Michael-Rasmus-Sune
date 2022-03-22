@@ -55,5 +55,13 @@ namespace ERPOpgave.Order
             {
             }
         }
+
+        internal Products.Product Product
+        {
+            get => default;
+            set
+            {
+            }
+        }
     }
 }

@@ -45,11 +45,20 @@
   <ItemGroup>
     <Compile Include="Data\Database.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Order\Orderline.cs" />
+    <Compile Include="Order\SalesOrder.cs" />
+    <Compile Include="PersonalInfo\Adress.cs" />
+    <Compile Include="PersonalInfo\ContactInfo.cs" />
+    <Compile Include="Products\Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

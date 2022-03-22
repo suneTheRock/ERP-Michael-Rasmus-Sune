@@ -8,6 +8,11 @@ namespace ERPOpgave.Products
 {
     internal class Product
     {
+        public Product()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public int Costprice
         {
             get => default;
