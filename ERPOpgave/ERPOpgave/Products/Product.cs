@@ -8,99 +8,55 @@ namespace ERPOpgave.Products
 {
     internal class Product
     {
-        public Product()
+
+        public enum UnitType
         {
-            throw new System.NotImplementedException();
+            Pieces,
+            Hours,
+            Meters
         }
 
-        public int Costprice
+        public Product(int productId, int costprice, int description, int itemNumber, string location, int name, int profitMargin, int profitMarginPct, int salesprice, decimal stock, int unit, UnitType unitType)
         {
-            get => default;
-            set
+            ProductId = productId;
+            Costprice = costprice;
+            Description = description;
+            ItemNumber = itemNumber;
+            Location = location;
+            Name = name;
+            ProfitMargin = profitMargin;
+            ProfitMarginPct = profitMarginPct;
+            Salesprice = salesprice;
+            Stock = stock;
+            Unit = unit;
+            localUnitType = unitType;
+            if (location.Length > 4)
             {
+                throw new Exception("Location must be less than 4 characters long.");
             }
         }
+        private UnitType localUnitType;
+        public int ProductId { get => default; set { } }
+        public int Costprice { get => default; set { } }
+        public int Description { get => default; set { } }
+        public int ItemNumber { get => default; set { } }
+        public string Location { get => default; set { } }
+        public int Name { get => default; set { } }
+        public int ProfitMargin { get => default; set { } }
+        public int ProfitMarginPct { get => default; set { } }
+        public int Salesprice { get => default; set { } }
+        public decimal Stock { get => default; set { } }
+        public int Unit { get => default; set { } }
 
-        public int Description
+        public int GetProfitMargin()
         {
-            get => default;
-            set
-            {
-            }
+            return Salesprice - Costprice;
         }
 
-        public int ItemNumber
+        public decimal GetProfitMarginPct()
         {
-            get => default;
-            set
-            {
-            }
-        }
 
-        public int Location
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public int Name
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public int ProfitMargin
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public int ProfitMarginPct
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public int Salesprice
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public int Stock
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public int Unit
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public void GetProfitMargin()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void GetProfitMarginPct()
-        {
-            throw new System.NotImplementedException();
+            return ((Costprice - Salesprice) / Costprice * 100);
         }
     }
 }
