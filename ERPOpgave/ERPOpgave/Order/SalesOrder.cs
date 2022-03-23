@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ERPOpgave.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,70 +9,58 @@ namespace ERPOpgave.Order
 {
     internal class SalesOrder
     {
-
-        internal Models.Customer Customer
+        public enum OrderStatus
         {
-            get => default;
-            set
-            {
-            }
+            None, Created, Confirmed, Packed, Finished
         }
+        internal Models.Customer Customer { get => default; set { } }
         internal List<Orderline> Orderlines;
 
-        internal Orderline Orderline
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        internal Orderline Orderline { get => default; set { } }
 
-        public int Complete
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public bool Complete { get => default; set { } }
 
-        public int Created
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public DateTime OrderCreated { get => default; set { } }
 
-        public int DeliveryAdress
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public DateTime OrderCompleted { get => default; set { } }
 
-        public int ID
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public string DeliveryAdress { get => default; set { } }
 
-        public int Lines
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public int CustomerID { get => default; set { } }
+
+        public int Lines { get => default; set { } }
+
         public int OrderNumber;
-        public int OrderNames
+
+        public SalesOrder(Customer customer, List<Orderline> orderlines, Orderline orderline, bool complete, DateTime created, string deliveryAdress, int iD, int lines, int orderNumber, string orderNames, OrderStatus status)
         {
-            get => default;
-            set
+            Customer = customer;
+            Orderlines = orderlines;
+            Orderline = orderline;
+            Complete = complete;
+            OrderCreated = created;
+            DeliveryAdress = deliveryAdress;
+            CustomerID = iD;
+            Lines = lines;
+            OrderNumber = orderNumber;
+            OrderNames = orderNames;
+            Status = status;
+        }
+
+        public string OrderNames { get => default; set { } }
+
+        public OrderStatus Status { get; }
+
+        public decimal OrderAmount { get => GetOrderAmount(); set { } }
+
+        public decimal GetOrderAmount() 
+        {
+            decimal returnamount = 0;
+            foreach (var orderline in Orderlines)
             {
+                returnamount += (Orderline.UnitPrice * Orderline.Quantity);
             }
+            return returnamount;
         }
     }
 }
