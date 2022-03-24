@@ -13,6 +13,7 @@ namespace ERPOpgave.Data
         static  Database() 
         {
             Instance = new Database();
+
             
         }
 
@@ -54,4 +55,5 @@ namespace ERPOpgave.Data
             }
             
         }
+
 }
