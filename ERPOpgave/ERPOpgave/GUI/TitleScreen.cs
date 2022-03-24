@@ -11,7 +11,7 @@ namespace ERPOpgave.GUI
     {
 		// HOW TO MENU:
 		public override string Title { get; set; } = "LNE Security A/S";
-		public string Menu { get; set; } = "";
+		public string Menu { get; set; } = "Titel";
 		protected override void Draw()
 		{
 			Clear(this);
