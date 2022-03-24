@@ -16,7 +16,7 @@ namespace ERPOpgave.Products
             Meters
         }
 
-        public Product(int productId, int costprice, int description, int itemNumber, string location, int name, int profitMargin, int profitMarginPct, int salesprice, decimal stock, int unit, UnitType unitType)
+        public Product(int productId, int costprice, string description, int itemNumber, string location, string name, int profitMargin, int profitMarginPct, int salesprice, decimal stock, int unit, UnitType unitType)
         {
             ProductId = productId;
             Costprice = costprice;
@@ -38,10 +38,10 @@ namespace ERPOpgave.Products
         private UnitType localUnitType;
         public int ProductId { get => default; set { } }
         public int Costprice { get => default; set { } }
-        public int Description { get => default; set { } }
+        public string Description { get => default; set { } }
         public int ItemNumber { get => default; set { } }
         public string Location { get => default; set { } }
-        public int Name { get => default; set { } }
+        public string Name { get => default; set { } }
         public int ProfitMargin { get => default; set { } }
         public int ProfitMarginPct { get => default; set { } }
         public int Salesprice { get => default; set { } }

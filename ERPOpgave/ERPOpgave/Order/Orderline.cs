@@ -16,7 +16,7 @@ namespace ERPOpgave.Order
             }
         }
 
-        public int ItemText
+        public string ItemText
         {
             get => default;
             set

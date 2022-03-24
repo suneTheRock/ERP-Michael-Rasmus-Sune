@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ERPOpgave.PersonalInfo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,60 +9,29 @@ namespace ERPOpgave.Models
 {
     internal class Person
     {
-        internal PersonalInfo.Adress Adress
+        public Person(Adress adress, ContactInfo contactInfo, string email, string firstName, string lastName, int phone)
         {
-            get => default;
-            set
-            {
-            }
+            Adress = adress;
+            ContactInfo = contactInfo;
+            Email = email;
+            FirstName = firstName;
+            FullName = $"{firstName} {lastName}";
+            LastName = lastName;
+            Phone = phone;
         }
 
-        internal PersonalInfo.ContactInfo ContactInfo
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        internal PersonalInfo.Adress Adress { get => default; set { } }
 
-        public int Email
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        internal PersonalInfo.ContactInfo ContactInfo { get => default; set { } }
 
-        public int FirstName
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public string Email { get => default; set { } }
 
-        public int FullName
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public string FirstName { get => default; set { } }
 
-        public int LastName
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public string FullName { get => default; set { } }
 
-        public int Phone
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public string LastName { get => default; set { } }
+
+        public int Phone { get => default; set { } }
     }
 }
