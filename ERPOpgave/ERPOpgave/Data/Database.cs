@@ -13,5 +13,6 @@ namespace ERPOpgave.Data
         {
             Instance = new Database();
         }
+
     }
 }
