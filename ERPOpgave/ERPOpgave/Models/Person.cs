@@ -9,6 +9,14 @@ namespace ERPOpgave.Models
 {
     public class Person
     {
+        public Person(string email, string firstName, string lastName, int phone)
+        {
+            Email = email;
+            FirstName = firstName;
+            FullName = $"{firstName} {lastName}";
+            LastName = lastName;
+            Phone = phone;
+        }
         public Person(Adress adress, ContactInfo contactInfo, string email, string firstName, string lastName, int phone)
         {
             Adress = adress;
