@@ -3,8 +3,12 @@
     "",
     "\\ERPOpgave",
     "\\ERPOpgave\\ERPOpgave",
-    "\\ERPOpgave\\ERPOpgave\\PersonalInfo"
+    "\\ERPOpgave\\ERPOpgave\\Data",
+    "\\ERPOpgave\\ERPOpgave\\Models",
+    "\\ERPOpgave\\ERPOpgave\\Order",
+    "\\ERPOpgave\\ERPOpgave\\PersonalInfo",
+    "\\ERPOpgave\\ERPOpgave\\Products"
   ],
-  "SelectedNode": "\\ERPOpgave\\ERPOpgave\\PersonalInfo\\Adress.cs",
+  "SelectedNode": "\\ERPOpgave\\ERPOpgave\\Data\\Database.cs",
   "PreviewInSolutionExplorer": false
 }
