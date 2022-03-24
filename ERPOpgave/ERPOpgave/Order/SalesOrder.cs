@@ -8,70 +8,21 @@ namespace ERPOpgave.Order
 {
     internal class SalesOrder
     {
-
-        internal Models.Customer Customer
+        public enum Complete
         {
-            get => default;
-            set
-            {
-            }
+            Yes,
+            No
         }
+        internal Models.Customer Customer { get => default; set { } }
+
         internal List<Orderline> Orderlines;
-
-        internal Orderline Orderline
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public int Complete
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public int Created
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public int DeliveryAdress
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public int ID
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public int Lines
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        internal Orderline Orderline { get => default; set { } }
+        public Complete Completed { get => default; set { } }
+        public DateTime Created { get => default; set { } }
+        public string DeliveryAdress { get => default; set { } }
+        public int ID { get => default; set { } }
+        public int Lines { get => default; set { } }
         public int OrderNumber;
-        public int OrderNames
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public string OrderNames { get => default; set { } }
     }
 }
