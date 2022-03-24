@@ -32,6 +32,7 @@ namespace ERPOpgave.Products
             localUnitType = unitType;
             if (location.Length > 4)
             {
+                //Kaster en Exception tilbage hvis hyldenummer er over 4 numre.
                 throw new Exception("Location must be less than 4 characters long.");
             }
         }
@@ -50,12 +51,13 @@ namespace ERPOpgave.Products
 
         public int GetProfitMargin()
         {
+            //Profit Metode
             return Salesprice - Costprice;
         }
 
         public decimal GetProfitMarginPct()
         {
-
+            //Profit I procent metode
             return ((Costprice - Salesprice) / Costprice * 100);
         }
     }
