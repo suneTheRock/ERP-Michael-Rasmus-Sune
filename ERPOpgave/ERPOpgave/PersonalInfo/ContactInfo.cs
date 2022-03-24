@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERPOpgave.PersonalInfo
 {
-    internal class ContactInfo
+    public class ContactInfo
     {
         public int ContactInfoID { get => default; set { } }
 

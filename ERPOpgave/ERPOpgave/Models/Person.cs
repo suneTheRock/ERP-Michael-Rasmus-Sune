@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ERPOpgave.Models
 {
-    internal class Person
+    public class Person
     {
         public Person(Adress adress, ContactInfo contactInfo, string email, string firstName, string lastName, int phone)
         {

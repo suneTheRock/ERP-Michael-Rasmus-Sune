@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERPOpgave.PersonalInfo
 {
-    internal class Adress
+    public class Adress
     {
         public Adress(string city, int number, string street, int zipCode)
         {
