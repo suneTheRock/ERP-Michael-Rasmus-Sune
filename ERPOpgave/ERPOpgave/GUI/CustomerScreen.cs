@@ -25,7 +25,7 @@ namespace ERPOpgave.GUI
 			//Add all the things you want on that list, with a string to represent them on the menu screen.
 			listPage.Add(new Customer(1,"Mailadress1@dot.com", "Tom", "Jerrison", 29292929));
 			listPage.Add(new Customer(2, "Mailadress2@dot.com", "Ben", "Jerrison", 292992929));
-			listPage.Add(new Customer(3, "Mailadress3@dot.com", "Tom", "Jerrison", 88888888));
+			listPage.Add(new Customer(3, "Mailadress3@dot.com", "Jerry", "Tommison", 88888888));
 			//We add a Column with (<A title taken from above> , <"The Variablename we gave them in their own class">)
 			listPage.AddColumn(CustomerNumber, "CustomerID");
 			listPage.AddColumn(Name, "FullName");

@@ -14,14 +14,14 @@ namespace ERPOpgave.Models
         }
         public Customer(int customerid, string email, string firstName, string lastName, int phone) :base(email, firstName, lastName,phone)
         {
-            CustomerID = customerid;
-            Email = email;
-            FullName = $"{firstName} {lastName}";
-            Phone = phone;
+            this.CustomerID = customerid;
+            this.Email = email;
+            this.FullName = $"{firstName} {lastName}";
+            this.Phone = phone;
 
         }
-        public int CustomerID { get => default; set { } }
-        public int CustomerNumber { get => default; set { } }
-        public int LastOrderDate { get => default; set { } }
+        public int CustomerID { get; set; }
+        public int CustomerNumber { get; set; }
+        public int LastOrderDate { get; set; }
     }
 }
