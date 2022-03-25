@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ERPOpgave.GUI
 {
-    internal class ProductMenuList
+    internal class ProductMenuList : Screen
     {
+        public override string Title { get; set; } = "LINE Security A/S";
     }
 }
