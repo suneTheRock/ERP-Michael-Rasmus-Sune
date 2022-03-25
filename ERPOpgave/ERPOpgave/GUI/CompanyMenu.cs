@@ -42,9 +42,25 @@ namespace ERPOpgave.GUI
 			listPage.AddColumn("City", "City");
 			listPage.AddColumn("Country", "Country");
 			listPage.AddColumn("Currency", "Currency");
+			
+			Console.WriteLine("Tryk på F1 for at oprette opsætte en Virksomhed");
 			//Draw to see this printed out
 			listPage.Draw();
 		}
+
+		public void CreateNewCompanyToList()
+        {
+			Clear();
+			Console.WriteLine("Opsætning af nye virksomhed");
+			Console.WriteLine("-----------------------------");
+			Console.WriteLine("Indtast Venligst virksomhedens oplysninger");
+			Console.WriteLine("Navn: "); var navneInput = Console.ReadLine();
+			if(navneInput != null)
+            {
+				
+            }
+
+        }
 	}
 
 }
