@@ -1,2 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using ERPOpgave.GUI;
+using TECHCOOL.UI;
+
+CompanyMenu titlescreen = new CompanyMenu();
+Screen.Display(titlescreen);
