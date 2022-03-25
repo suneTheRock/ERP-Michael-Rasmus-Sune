@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace ERPOpgave.GUI
 {
-    internal class ProductMenuList : Screen
+    internal class ProductMenuList : TECHCOOL.UI.Screen
     {
         public override string Title { get; set; } = "LINE Security A/S";
+
+        protected override void Draw()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
