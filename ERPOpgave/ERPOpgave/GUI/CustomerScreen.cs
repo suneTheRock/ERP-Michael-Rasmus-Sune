@@ -16,6 +16,8 @@ namespace ERPOpgave.GUI
 		public string Phonenumber { get; set; } = "TelefonNummer";
 		public string Email { get; set; } = "E-Mail";
 
+		public string LastOrderDate { get; set; } = "Dato for sidste køb";
+
 		protected override void Draw()
 		{
 			Clear(this);
@@ -31,6 +33,7 @@ namespace ERPOpgave.GUI
 			listPage.AddColumn(Name, "FullName");
 			listPage.AddColumn(Phonenumber, "Phone");
 			listPage.AddColumn(Email, "Email");
+			listPage.AddColumn(LastOrderDate.ToString(), "LastOrder");
 
 			//Draw to see this printed out
 			listPage.Draw();
