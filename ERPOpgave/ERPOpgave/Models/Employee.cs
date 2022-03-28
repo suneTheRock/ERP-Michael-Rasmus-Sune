@@ -13,14 +13,15 @@ namespace ERPOpgave.Models
         {
         }
 
-        //public int EmplID
-        //{
-        //}
+        public int EmplID
+        public Employee(Adress adress, ContactInfo contactInfo, string email, string firstName, string lastName, int phone) : base(adress, contactInfo, email, firstName, lastName, phone)
+        {
+        }
 
-        //public int EmplID { get => default; set { } }
+        public int EmplID { get => default; set { } }
 
-        //public int Hired { get => default; set { } }
+        public int Hired { get => default; set { } }
 
-        //public int Salary { get => default; set { } }
+        public int Salary { get => default; set { } }
     }
 }

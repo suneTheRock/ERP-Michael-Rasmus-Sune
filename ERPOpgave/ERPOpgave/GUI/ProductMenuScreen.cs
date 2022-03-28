@@ -18,6 +18,8 @@ namespace ERPOpgave.GUI
         public string SalesPrice = "Salgspris";
         public string AvancePercent = "Avance i procent";
 
+        protected Product selected;
+
         protected override void Draw()
         {
             Clear(this);
@@ -36,11 +38,31 @@ namespace ERPOpgave.GUI
             listPage.AddColumn(SalesPrice, "Salesprice");
             listPage.AddColumn(AvancePercent, "ProfitMarginPct");
             //use Select to make this our current object
-            Product selected = listPage.Select();
+            selected = listPage.Select();
+          
+
+        }
+    }
+    internal class ShowProductScreen : ProductMenuScreen
+    {
+        protected override void Draw()
+        {
+            base.Draw();
             Clear(this);
             //Print out current Object's details
             Console.WriteLine($"Varenummer: {selected.ItemNumber} \nNavn: {selected.Name} \nBeskrivelse: {selected.Description} \nSalgspris: {selected.Salesprice} \nIndkøbspris: {selected.Costprice} \nLokation: {selected.Location} \nAntal på lager: {selected.Stock} \nEnhedstype: {selected.Unittype} \nAvance I procent: {selected.ProfitMarginPct} \nAvance I kr: {selected.ProfitMargin}");
 
+
+        }
+    }
+    internal class UpdateProductScreen : ProductMenuScreen
+    {
+        protected override void Draw()
+        {
+            base.Draw();
+            Clear(this);
+            //Print out current Object's details
+            Console.WriteLine( "update screen");
 
         }
     }
