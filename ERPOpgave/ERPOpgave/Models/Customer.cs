@@ -22,6 +22,6 @@ namespace ERPOpgave.Models
         }
         public int CustomerID { get; set; }
         public int CustomerNumber { get; set; }
-        public int LastOrderDate { get; set; }
+        public DateOnly LastOrderDate { get; set; }
     }
 }
