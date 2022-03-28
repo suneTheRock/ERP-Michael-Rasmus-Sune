@@ -1,20 +1,26 @@
 ﻿using ERPOpgave.GUI;
 using TECHCOOL.UI;
 
-CompanyMenu titlescreen = new CompanyMenu();
-Screen.Display(titlescreen);
 
-ConsoleKeyInfo info = Console.ReadKey();
+    CompanyMenu titlescreen = new CompanyMenu();
+    Screen.Display(titlescreen);
 
-Screen.Clear(titlescreen);
+    ConsoleKeyInfo info = Console.ReadKey();
 
-if (info.Key == ConsoleKey.Escape)
-{
-    CompanyMenu companyMenu = new CompanyMenu();
-    companyMenu.CreateNewCompanyToList();
+    Screen.Clear(titlescreen);
+
+    if (info.Key == ConsoleKey.Escape)
+    {
+        CompanyMenu companyMenu = new CompanyMenu();
+        companyMenu.CreateNewCompanyToList();
+
+
+    }
 
     
-}
+
+
+
 
     
 
