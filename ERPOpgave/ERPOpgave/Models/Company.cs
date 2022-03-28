@@ -17,6 +17,13 @@ namespace ERPOpgave.Models
             City = city;
             Country = country;
             Currency = currency;
+
+            
+        }
+
+        public Company()
+        {
+
         }
 
         public string CompanyName { get; set; }

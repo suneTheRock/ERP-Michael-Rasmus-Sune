@@ -12,6 +12,7 @@ if (info.Key == ConsoleKey.Escape)
 {
     CompanyMenu companyMenu = new CompanyMenu();
     companyMenu.CreateNewCompanyToList();
+
     
 }
 

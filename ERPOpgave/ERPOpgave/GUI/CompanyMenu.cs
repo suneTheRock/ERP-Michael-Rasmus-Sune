@@ -19,6 +19,7 @@ namespace ERPOpgave.GUI
 		public string Country { get; set; } = "";
 		public string Currency { get; set; } = "";
 
+		public ListPage<Company> listPage = new ListPage<Company>();
 
 
 		protected override void Draw()
@@ -26,7 +27,7 @@ namespace ERPOpgave.GUI
 			Clear(this);
 			//Make a Class to host our screen elements.
 			//Make a List Of that classtype
-			ListPage<Company> listPage = new ListPage<Company>();
+			//ListPage<Company> listPage = new ListPage<Company>();
 			//Add all the things you want on that list, with a string to represent them on the menu screen.
 			listPage.Add(new Company("CoolShop", "Danmarksgade", "20", "9000", "Aalborg", "Danmark", "DDK"));
 			listPage.Add(new Company("BigBooty A/S", "Bitches Street","69","6969", "Gotham", "Vatican City", "Altar Boys"));
@@ -43,7 +44,7 @@ namespace ERPOpgave.GUI
 			listPage.AddColumn("Country", "Country");
 			listPage.AddColumn("Currency", "Currency");
 			
-			Console.WriteLine("Tryk på F1 for at oprette opsætte en Virksomhed");
+			Console.WriteLine("Tryk på F1 for at oprette en Virksomhed");
 			//Draw to see this printed out
 			listPage.Draw();
 		}
@@ -54,13 +55,35 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("Opsætning af nye virksomhed");
 			Console.WriteLine("-----------------------------");
 			Console.WriteLine("Indtast Venligst virksomhedens oplysninger");
-			Console.WriteLine("Navn: "); var navneInput = Console.ReadLine();
-			if(navneInput != null)
-            {
-				
-            }
+			Console.WriteLine("Navn: "); var name = Console.ReadLine();
+			Console.WriteLine("Virksomhedens adresse: ");
+			var companyStreet = Console.ReadLine();
+			Console.WriteLine("adresse nr: ");
+			var companyStreetNumber = Console.ReadLine();
+			Console.WriteLine("postnummer: ");
+			var postNumber = Console.ReadLine();
+			Console.WriteLine("By: ");
+			var companyCity = Console.ReadLine();
+			Console.WriteLine("Land: ");
+			var companyCountry = Console.ReadLine();
+			Console.WriteLine("Valuta: ");
+			var companyCurrency = Console.ReadLine();
 
-        }
+			listPage.Add(new Company(name, companyStreet, companyStreetNumber, postNumber, companyCity, companyCountry, companyCurrency));
+
+			// tilbage til listen
+			Draw();
+			
+
+
+
+
+
+
+
+
+
+		}
 	}
 
 }
