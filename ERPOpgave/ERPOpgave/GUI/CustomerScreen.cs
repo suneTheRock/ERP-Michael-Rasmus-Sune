@@ -51,8 +51,8 @@ namespace ERPOpgave.GUI
 			listPage.Draw();
 
 			//Screen Prompt for our viewers to decide which of the two
-			Console.WriteLine("Tryk på 1 for at redigere en Virksomhed");
-			Console.WriteLine("Tryk på 2 for at oprette en Virksomhed");
+			Console.WriteLine("Tryk på 1 for at redigere en kunde");
+			Console.WriteLine("Tryk på 2 for at oprette en kunde");
 			ConsoleKeyInfo info = Console.ReadKey();
 
 			//Screen options 1 and 2, this doesnt work here, we need a proper menu to control this
