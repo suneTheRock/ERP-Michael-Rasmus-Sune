@@ -93,16 +93,26 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("-----------------------------");
 			Console.WriteLine("Indtast Venligst kundens oplysninger");
 
+			try
+            {
+				Console.WriteLine("Kundenummer: "); selected.CustomerID = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Kundens fornavn: "); selected.FirstName = Console.ReadLine();
+				Console.WriteLine("Kundens efternavn: "); selected.LastName = Console.ReadLine();
+				Console.WriteLine("Email "); selected.Email = Console.ReadLine();
+				Console.WriteLine("Tlf nr: "); selected.Phone = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Adresse: "); selected.Adress.Street = Console.ReadLine();
+				Console.WriteLine("adresse nr: "); selected.Adress.Number = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("By: "); selected.Adress.City = Console.ReadLine();
+				Console.WriteLine("Postnummer: "); selected.Adress.ZipCode = Convert.ToInt32(Console.ReadLine());
+
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+
 			//Run through each thing that needs to be edited in the employee
-			Console.WriteLine("Kundenummer: "); selected.CustomerID = Convert.ToInt32(Console.ReadLine());
-			Console.WriteLine("Kundens fornavn: "); selected.FirstName = Console.ReadLine();
-			Console.WriteLine("Kundens efternavn: "); selected.LastName = Console.ReadLine();
-			Console.WriteLine("Email "); selected.Email = Console.ReadLine();
-			Console.WriteLine("Tlf nr: "); selected.Phone = Convert.ToInt32(Console.ReadLine());
-			Console.WriteLine("Adresse: "); selected.Adress.Street = Console.ReadLine();
-			Console.WriteLine("adresse nr: "); selected.Adress.Number = Convert.ToInt32(Console.ReadLine());
-			Console.WriteLine("By: "); selected.Adress.City = Console.ReadLine();
-			Console.WriteLine("Postnummer: "); selected.Adress.ZipCode = Convert.ToInt32(Console.ReadLine());
+			
 			
 			
 
