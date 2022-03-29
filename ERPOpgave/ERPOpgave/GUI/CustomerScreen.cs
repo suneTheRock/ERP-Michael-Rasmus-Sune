@@ -56,7 +56,7 @@ namespace ERPOpgave.GUI
 			ConsoleKeyInfo info = Console.ReadKey();
 
 			//Screen options 1 and 2, this doesnt work here, we need a proper menu to control this
-			if (info.Key == ConsoleKey.F1)
+			if (info.Key == ConsoleKey.NumPad1)
 			{
 				//CompanyMenu companyMenu = new CompanyMenu();
 				this.EditCustomer();
