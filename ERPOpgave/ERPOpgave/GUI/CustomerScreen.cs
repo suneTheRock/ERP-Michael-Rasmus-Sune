@@ -1,4 +1,5 @@
 ﻿using ERPOpgave.Models;
+using ERPOpgave.PersonalInfo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,14 @@ namespace ERPOpgave.GUI
     {
 		public ListPage<Customer> listPage = new ListPage<Customer>();
 		protected Customer selected;
+		public Adress ad;
 		public override string Title { get; set; } = "LNE Security A/S";
 		public string CustomerNumber { get; set; } = "Kundenummer";
 		public string Name { get; set; } = "Navn";
 		public string Phonenumber { get; set; } = "TelefonNummer";
 		public string Email { get; set; } = "E-Mail";
+
+		public string adresse { get; set; } = "Adresse";
 
 		public string LastOrderDate { get; set; } = "Dato for sidste køb";
 
@@ -46,6 +50,8 @@ namespace ERPOpgave.GUI
 			listPage.AddColumn(Phonenumber, "Phone");
 			listPage.AddColumn(Email, "Email");
 			listPage.AddColumn(LastOrderDate.ToString(), "LastOrder");
+			//listPage.AddColumn(adresse, "ad.Street");
+			
 
 			//Draw to see this printed out
 			listPage.Draw();
@@ -128,20 +134,22 @@ namespace ERPOpgave.GUI
 			Clear();
 			selected = listPage.Select();
 			Clear();
-			Console.WriteLine("Kundens Detalje");
-			Console.WriteLine("--------------------------------------------------");
+			Console.WriteLine("Kundens Detalje ");
+			Console.WriteLine("																				Tryk Esc + Enter for at gå tilbage til Menuen");
+			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
 			Console.WriteLine("Navn: " + selected.FullName);
 			Console.WriteLine("Efternavn: " + selected.LastName);
 			//Console.WriteLine("Adresse: " + selected.Adress.Street);
 			//Console.WriteLine("Husnummer: " + selected.Adress.Number);
 			//Console.WriteLine("Postnummer: " + selected.Adress.ZipCode);
 			//Console.WriteLine("By: " + selected.Adress.City);
-			//Console.WriteLine("Telefonnummer: " + selected.Phone);
-			//Console.WriteLine("Email: " + selected.Email);
+			Console.WriteLine("Telefonnummer: " + selected.Phone);
+			Console.WriteLine("Email: " + selected.Email);
+			
 
 
 
-        }
+		}
 
 		public void AddCustomerToList()
 		{
