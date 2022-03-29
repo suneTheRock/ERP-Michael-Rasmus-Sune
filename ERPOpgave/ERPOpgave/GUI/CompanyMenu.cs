@@ -21,34 +21,26 @@ namespace ERPOpgave.GUI
 
 		public ListPage<Company> listPage = new ListPage<Company>();
 		protected Company selected;
+
+		// Creating a constructor so our listpage gets all the info it needs ONCE. Remove listPage.Add from Draw!!!
         public CompanyMenu()
         {
-			this.populateList();
+			//This is all a placeholder untill we get the database running
+			listPage.Add(new Company("CoolShop", "Danmarksgade", "20", "9000", "Aalborg", "Danmark", "DDK"));
+			listPage.Add(new Company("BigBooty A/S", "Bitches Street", "69", "6969", "Gotham", "Vatican City", "Altar Boys"));
+			listPage.Add(new Company("LongSchlong A/S", "Bitches Street", "70", "6969", "Gotham", "Vatican City 2000", "Dogecoin"));
+			listPage.Add(new Company("Huge Tracks of land", "Bitches Street", "69", "6969", "Gotham", "Vatican City+ Premium Edition", "Altar Thems"));
 		}
-		protected void populateList()
-        {
-            listPage.Add(new Company("CoolShop", "Danmarksgade", "20", "9000", "Aalborg", "Danmark", "DDK"));
-            listPage.Add(new Company("BigBooty A/S", "Bitches Street", "69", "6969", "Gotham", "Vatican City", "Altar Boys"));
-            listPage.Add(new Company("LongSchlong A/S", "Bitches Street", "70", "6969", "Gotham", "Vatican City 2000", "Dogecoin"));
-            listPage.Add(new Company("Huge Tracks of land", "Bitches Street", "69", "6969", "Gotham", "Vatican City+ Premium Edition", "Altar Thems"));
-        }
 
 		protected override void Draw()
 		{
-			Clear(this);
-		//Make a Class to host our screen elements.
-		//Make a List Of that classtype
-		//ListPage<Company> listPage = new ListPage<Company>();
-
-		//Add all the things you want on that list, with a string to represent them on the menu screen.
-		//This is all a placeholder untill we get the database running
-		//listPage.Add(new Company("CoolShop", "Danmarksgade", "20", "9000", "Aalborg", "Danmark", "DDK"));
-		//listPage.Add(new Company("BigBooty A/S", "Bitches Street", "69", "6969", "Gotham", "Vatican City", "Altar Boys"));
-		//listPage.Add(new Company("LongSchlong A/S", "Bitches Street", "70", "6969", "Gotham", "Vatican City 2000", "Dogecoin"));
-		//listPage.Add(new Company("Huge Tracks of land", "Bitches Street", "69", "6969", "Gotham", "Vatican City+ Premium Edition", "Altar Thems"));
-
-		//We add a Column with (<A title taken from above> , <"The Variablename we gave them in their own class">)
-		listPage.AddColumn("CompanyName", "CompanyName");
+			Clear(this); //Keeping it Clean
+			//Make a List Of that classtype
+			//ListPage<Company> listPage = new ListPage<Company>();
+			//Add all the things you want on that list, with a string to represent them on the menu screen.
+		
+			//We add a Column with (<A title taken from above> , <"The Variablename we gave them in their own class">)
+			listPage.AddColumn("CompanyName", "CompanyName");
             listPage.AddColumn("Street", "Street");
 			listPage.AddColumn("Housenumber", "HouseNumber");
 			listPage.AddColumn("PostalNumber", "PostalNumber");
@@ -56,39 +48,54 @@ namespace ERPOpgave.GUI
 			listPage.AddColumn("Country", "Country");
 			listPage.AddColumn("Currency", "Currency");
 
-			
-		listPage.Draw();
-			//Screen Prompt for our viewers to decide which of the two
-			Console.WriteLine("Tryk på 1 for at redigere en Virksomhed");
-			Console.WriteLine("Tryk på 2 for at oprette en Virksomhed");
-			ConsoleKeyInfo info = Console.ReadKey();
+            listPage.Draw();
 
-			//Screen options 1 and 2, this doesnt work here, we need a proper menu to control this
-			if (info.Key == ConsoleKey.F1)
-			{
-				//CompanyMenu companyMenu = new CompanyMenu();
-				this.EditCompany();
-			}
-			if (info.Key == ConsoleKey.NumPad2)
-			{
-				CompanyMenu companyMenu = new CompanyMenu();
-				companyMenu.CreateNewCompanyToList();
-			}
+            //Screen Prompt for our viewers to decide which of our options they want:
+            Console.WriteLine("Tryk på F1 for at redigere en Virksomhed");
+			Console.WriteLine("Tryk på F2 for at oprette en Virksomhed");
+			Console.WriteLine("Tryk på F5 for at slette en Virksomhed");
 
-			//Draw to see this printed out // Or Select as was later added
-			//selected = listPage.Select();
+			//Controller for which option is chosen, including an escape bool to fuckin leave
+			bool loop = true;
+			while (loop = true)
+            {
+				ConsoleKeyInfo info = Console.ReadKey();
+				if (info.Key == ConsoleKey.F1)
+				{
+					//Edit Method with its own structure
+					EditCompany();
+				}
+				if (info.Key == ConsoleKey.F2)
+				{
+					//Create Method with its own structure
+					CreateNewCompanyToList();
+				}
+				if (info.Key == ConsoleKey.F5)
+				{
+					//Create Method with its own structure
+					CreateNewCompanyToList();
+				}
+				if (info.Key == ConsoleKey.Escape)
+				{
+					//Escape to leave
+					loop= false;
+				}
+			}
 		}
 		
 		public void EditCompany()
         {
-			selected = listPage.Select();
-			Clear();
+			Clear(); //Clean
+			selected = listPage.Select(); //Choose what Company to Edit
+			Clear(); //Clean Again
+
 			//Screen Prompt:
-            Console.WriteLine("Redigering af virksomhed oplysninger:");
+			Console.WriteLine("Redigering af virksomhed oplysninger:");
 			Console.WriteLine("-----------------------------");
 			Console.WriteLine("Indtast Venligst virksomhedens oplysninger");
 
-			//Run through each thing that needs to be edited in the employee
+			//Run through each thing that needs to be edited in the employee 
+			//These are showing wierd untill we make them parse the info into the right variable type
 			Console.WriteLine("Navn: "); selected.CompanyName = Console.ReadLine();
             Console.WriteLine("Virksomhedens adresse: "); selected.Street = Console.ReadLine();
 			Console.WriteLine("adresse nr: "); selected.HouseNumber = Console.ReadLine();
@@ -96,14 +103,16 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("By: "); selected.City = Console.ReadLine();
 			Console.WriteLine("Land: "); selected.Country = Console.ReadLine();			
 			Console.WriteLine("Valuta: "); selected.Currency = Console.ReadLine();
-
-			//listPage.
-			//This isn't going to work, I need to figure out how to target the selected company for its own edit.
-			//listPage.Select() = new Company(name, companyStreet, companyStreetNumber, postNumber, companyCity, companyCountry, companyCurrency)
+		}
+		public void DeleteCompany()
+		{
+			Clear(); //Clean
+			listPage.Remove(listPage.Select()); //Choose what Company to remove
+			Clear(); //Clean Again
 		}
 		public void CreateNewCompanyToList()
         {
-			Clear();
+			Clear(); //Clean
 			//Screen Prompt:
 			Console.WriteLine("Opsætning af nye virksomhed");
 			Console.WriteLine("-----------------------------");
@@ -119,9 +128,6 @@ namespace ERPOpgave.GUI
 
 			// .Add to create a new company
 			listPage.Add(new Company(name, companyStreet, companyStreetNumber, postNumber, companyCity, companyCountry, companyCurrency));
-
-			// tilbage til listen
-			Draw();
 		}
 	}
 
