@@ -128,6 +128,7 @@ namespace ERPOpgave.GUI
 
 			// tilbage til listen
 			Draw();
+
 		}
 	}
 
