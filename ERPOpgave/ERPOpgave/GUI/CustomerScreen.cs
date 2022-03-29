@@ -51,28 +51,41 @@ namespace ERPOpgave.GUI
 			listPage.Draw();
 
 			//Screen Prompt for our viewers to decide which of the two
-			Console.WriteLine("Tryk på 1 for at redigere en kunde");
-			Console.WriteLine("Tryk på 2 for at oprette en kunde");
-			ConsoleKeyInfo info = Console.ReadKey();
+			Console.WriteLine("Tryk på F1 for at redigere en kunde");
+			Console.WriteLine("Tryk på F2 for at oprette en kunde");
+			Console.WriteLine("Tryk på F5 for at kunde detalje");
 
-			//Screen options 1 and 2, this doesnt work here, we need a proper menu to control this
-			if (info.Key == ConsoleKey.NumPad1)
-			{
-				//CompanyMenu companyMenu = new CompanyMenu();
-				this.EditCustomer();
-			}
-			if (info.Key == ConsoleKey.NumPad2)
-			{
-				CustomerScreen customerScreen = new CustomerScreen();
-				customerScreen.AddCustomerToList();
+			bool loop = true;
+			while (loop)
+            {
+				ConsoleKeyInfo info = Console.ReadKey();
+
+				//Screen options 1 and 2, this doesnt work here, we need a proper menu to control this
+				if (info.Key == ConsoleKey.F1)
+				{
+					//CompanyMenu companyMenu = new CompanyMenu();
+					this.EditCustomer();
+				}
+				if (info.Key == ConsoleKey.F2)
+				{
+					CustomerScreen customerScreen = new CustomerScreen();
+					customerScreen.AddCustomerToList();
+				}
+				if(info.Key == ConsoleKey.Escape)
+                {
+					loop = false;
+                }
+
+				//Draw to see this printed out // Or Select as was later added
+				//selected = listPage.Select();
 			}
 
-			//Draw to see this printed out // Or Select as was later added
-			//selected = listPage.Select();
+
 		}
 
 		public void EditCustomer()
         {
+			Clear();
 			selected = listPage.Select();
 			Clear();
 			//Screen Prompt:
