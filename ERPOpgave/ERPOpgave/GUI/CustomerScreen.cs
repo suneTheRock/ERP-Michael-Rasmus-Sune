@@ -10,6 +10,7 @@ namespace ERPOpgave.GUI
 {
     internal class CustomerScreen : Screen
     {
+		public ListPage<Customer> listPage = new ListPage<Customer>();
 		public override string Title { get; set; } = "LNE Security A/S";
 		public string CustomerNumber { get; set; } = "Kundenummer";
 		public string Name { get; set; } = "Navn";
@@ -24,7 +25,7 @@ namespace ERPOpgave.GUI
 			//Make a Class to host our screen elements.
 			//Make a List Of that classtype
 			Console.WriteLine("Indtast venligst Ctl for at foretage redigering af kunde fra listen");
-			ListPage<Customer> listPage = new ListPage<Customer>();
+			
 			//Add all the things you want on that list, with a string to represent them on the menu screen.
 			listPage.Add(new Customer(1,"Mailadress1@dot.com", "Tom", "Jerrison", 29292929));
 			listPage.Add(new Customer(2, "Mailadress2@dot.com", "Ben", "Jerrison", 292992929));
@@ -40,9 +41,15 @@ namespace ERPOpgave.GUI
 			listPage.Draw();
 		}
 
-		public void EditCustomer(int id)
+		public void EditCustomer()
         {
-
+			
+			if(listPage.Select().CustomerID != null)
+            {
+				CustomerScreen newScreen = new CustomerScreen();
+				
+				
+            }
         }
 	}
 }

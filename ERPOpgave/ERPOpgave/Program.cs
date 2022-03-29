@@ -5,3 +5,6 @@ using TECHCOOL.UI;
 //Screen.Display(titlescreen);
 CustomerScreen titlescreen = new CustomerScreen();
 Screen.Display(titlescreen);
+
+
+        
