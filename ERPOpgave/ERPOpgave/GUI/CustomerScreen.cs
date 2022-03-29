@@ -114,27 +114,37 @@ namespace ERPOpgave.GUI
 
 		public void AddCustomerToList()
 		{
-
 			Clear();
+
+			try
+            {
+				Console.WriteLine("Opsætning af nye virksomhed");
+				Console.WriteLine("-----------------------------");
+				Console.WriteLine("Indtast Venligst virksomhedens oplysninger");
+				//Run through each variable needed to create a new company
+				Console.WriteLine("Kundenummer: "); var kundeNummer = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Kundens fornavn: "); var fornavn = Console.ReadLine();
+				Console.WriteLine("Kundens efternavn: "); var efterNavn = Console.ReadLine();
+				Console.WriteLine("Email: "); var email = Console.ReadLine();
+				Console.WriteLine("Tlf nr: "); var tlfNr = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Adresse: "); var adresse = Console.ReadLine();
+				Console.WriteLine("Adresse nr: "); var adresseNr = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("By: "); var by = Console.ReadLine();
+				Console.WriteLine("Postnummer: "); var postnummer = Convert.ToInt32(Console.ReadLine());
+
+				listPage.Add(new Customer(kundeNummer, fornavn, efterNavn, email, tlfNr, adresse, adresseNr, postnummer, by));
+
+			}
+			catch (Exception ex)
+            {
+				
+				Console.WriteLine(ex.Message);
+				
+				
+            }
+			
 			//Screen Prompt:
-			Console.WriteLine("Opsætning af nye virksomhed");
-			Console.WriteLine("-----------------------------");
-			Console.WriteLine("Indtast Venligst virksomhedens oplysninger");
-			//Run through each variable needed to create a new company
-			Console.WriteLine("Kundenummer: "); var kundeNummer = Convert.ToInt32(Console.ReadLine());
-			Console.WriteLine("Kundens fornavn: "); var fornavn = Console.ReadLine();
-			Console.WriteLine("Kundens efternavn: "); var efterNavn = Console.ReadLine();
-			Console.WriteLine("Email: "); var email = Console.ReadLine();
-			Console.WriteLine("Tlf nr: "); var tlfNr = Convert.ToInt32(Console.ReadLine());
-			Console.WriteLine("Adresse: "); var adresse = Console.ReadLine();
-			Console.WriteLine("Adresse nr: "); var adresseNr = Convert.ToInt32(Console.ReadLine());
-			Console.WriteLine("By: "); var by = Console.ReadLine();
-			Console.WriteLine("Postnummer: "); var postnummer = Convert.ToInt32(Console.ReadLine());
-
-			listPage.Add(new Customer(kundeNummer, fornavn, efterNavn, email, tlfNr, adresse, adresseNr, postnummer, by));
-
-
-
+			
 			// .Add to create a new company
 			//listPage.Add(new Customer(adresse, kontaktInfo, email, fornavn, efterNavn, tlfNr, by, postnummer, kontaktInfo, valuta));
 			//listPage.Add(new Customer(name, companyStreet, companyStreetNumber, postNumber, companyCity, companyCountry, companyCurrency));
