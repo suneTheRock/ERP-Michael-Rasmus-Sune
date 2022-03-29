@@ -91,7 +91,6 @@ namespace ERPOpgave.GUI
 				//selected = listPage.Select();
 			}
 
-
 		}
 
 		public void EditCustomer()
@@ -145,10 +144,6 @@ namespace ERPOpgave.GUI
 			//Console.WriteLine("By: " + selected.Adress.City);
 			Console.WriteLine("Telefonnummer: " + selected.Phone);
 			Console.WriteLine("Email: " + selected.Email);
-			
-
-
-
 		}
 
 		public void AddCustomerToList()
@@ -176,10 +171,7 @@ namespace ERPOpgave.GUI
 			}
 			catch (Exception ex)
             {
-				
 				Console.WriteLine(ex.Message);
-				
-				
             }
 			
 			//Screen Prompt:
