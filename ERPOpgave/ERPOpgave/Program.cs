@@ -1,28 +1,16 @@
 ﻿using ERPOpgave.GUI;
 using TECHCOOL.UI;
-
-
+//While true to properly create an inescapeable loop
+while (true)
+{
+    //CompanyMenu titlescreen = new CompanyMenu();
+    //TitleScreen titlescreen = new TitleScreen();
+    //CustomerScreen titlescreen = new CustomerScreen();
     CompanyMenu titlescreen = new CompanyMenu();
     Screen.Display(titlescreen);
-
-    ConsoleKeyInfo info = Console.ReadKey();
-
+    //What's happening here?
+    //Why the clear?
     Screen.Clear(titlescreen);
 
-    if (info.Key == ConsoleKey.Escape)
-    {
-        CompanyMenu companyMenu = new CompanyMenu();
-        companyMenu.CreateNewCompanyToList();
-
-
-    }
-
     
-
-
-
-
-    
-
-
-
+}
