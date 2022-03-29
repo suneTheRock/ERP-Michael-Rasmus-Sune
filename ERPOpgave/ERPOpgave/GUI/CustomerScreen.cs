@@ -71,6 +71,11 @@ namespace ERPOpgave.GUI
 					CustomerScreen customerScreen = new CustomerScreen();
 					customerScreen.AddCustomerToList();
 				}
+				if(info.Key == ConsoleKey.F5)
+                {
+					this.ShowDetailsOfcustomerFromList();
+
+				}
 				if(info.Key == ConsoleKey.Escape)
                 {
 					loop = false;
@@ -113,14 +118,30 @@ namespace ERPOpgave.GUI
 
 			//Run through each thing that needs to be edited in the employee
 			
-			
-			
-
-
 			//listPage.
 			//This isn't going to work, I need to figure out how to target the selected company for its own edit.
 			//listPage.Select() = new Company(name, companyStreet, companyStreetNumber, postNumber, companyCity, companyCountry, companyCurrency)
 		}
+
+		public void ShowDetailsOfcustomerFromList()
+        {
+			Clear();
+			selected = listPage.Select();
+			Clear();
+			Console.WriteLine("Kundens Detalje");
+			Console.WriteLine("--------------------------------------------------");
+			Console.WriteLine("Navn: " + selected.FullName);
+			Console.WriteLine("Efternavn: " + selected.LastName);
+			//Console.WriteLine("Adresse: " + selected.Adress.Street);
+			//Console.WriteLine("Husnummer: " + selected.Adress.Number);
+			//Console.WriteLine("Postnummer: " + selected.Adress.ZipCode);
+			//Console.WriteLine("By: " + selected.Adress.City);
+			//Console.WriteLine("Telefonnummer: " + selected.Phone);
+			//Console.WriteLine("Email: " + selected.Email);
+
+
+
+        }
 
 		public void AddCustomerToList()
 		{
