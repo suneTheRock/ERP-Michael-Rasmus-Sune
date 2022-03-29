@@ -20,6 +20,16 @@ namespace ERPOpgave.Models
             this.Phone = phone;
 
         }
+
+        public Customer(int customerId, string firstname, string lastName, string email, int phone, string adress, int adressNr, int postNummer, string city) :base(email, firstname, lastName, phone)
+        {
+            this.CustomerID=customerId;
+            this.Adress.Street = adress;
+            this.Adress.City = city;
+            this.Adress.Number = adressNr;
+            this.Adress.ZipCode = postNummer;
+            this.Phone = phone;
+        }
         public int CustomerID { get; set; }
         public int CustomerNumber { get; set; }
         public DateTime LastOrder { get; set; }
