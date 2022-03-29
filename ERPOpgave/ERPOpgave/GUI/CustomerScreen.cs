@@ -24,6 +24,7 @@ namespace ERPOpgave.GUI
 			Clear(this);
 			//Make a Class to host our screen elements.
 			//Make a List Of that classtype
+			Console.WriteLine("Indtast venligst F1 for at oprette en kunde til listen");
 			Console.WriteLine("Indtast venligst F2 for at foretage redigering af kunde fra listen");
 			
 			//Add all the things you want on that list, with a string to represent them on the menu screen.
