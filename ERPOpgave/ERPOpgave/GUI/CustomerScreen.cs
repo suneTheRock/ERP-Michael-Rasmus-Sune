@@ -24,7 +24,7 @@ namespace ERPOpgave.GUI
 			Clear(this);
 			//Make a Class to host our screen elements.
 			//Make a List Of that classtype
-			Console.WriteLine("Indtast venligst Ctl for at foretage redigering af kunde fra listen");
+			Console.WriteLine("Indtast venligst F2 for at foretage redigering af kunde fra listen");
 			
 			//Add all the things you want on that list, with a string to represent them on the menu screen.
 			listPage.Add(new Customer(1,"Mailadress1@dot.com", "Tom", "Jerrison", 29292929));
@@ -44,12 +44,6 @@ namespace ERPOpgave.GUI
 		public void EditCustomer()
         {
 			
-			if(listPage.Select().CustomerID != null)
-            {
-				CustomerScreen newScreen = new CustomerScreen();
-				
-				
-            }
         }
 	}
 }
