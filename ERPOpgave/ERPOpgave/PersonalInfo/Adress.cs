@@ -15,6 +15,10 @@ namespace ERPOpgave.PersonalInfo
             Street = street;
             ZipCode = zipCode;
         }
+        public Adress()
+        {
+
+        }
 
         public string City { get => default; set { } }
 

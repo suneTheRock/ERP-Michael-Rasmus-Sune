@@ -13,6 +13,7 @@ namespace ERPOpgave.GUI
     {
 		public ListPage<Customer> listPage = new ListPage<Customer>();
 		protected Customer selected;
+		public Adress adress = new Adress();
 		public Adress ad;
 		public override string Title { get; set; } = "LNE Security A/S";
 		public string CustomerNumber { get; set; } = "Kundenummer";
@@ -26,6 +27,7 @@ namespace ERPOpgave.GUI
 
 		public CustomerScreen()
         {
+			//Call Customer dummies method to create users for Test.
 			CustomerDummies();
         }
 
@@ -70,7 +72,7 @@ namespace ERPOpgave.GUI
 				//Screen options 1 and 2, this doesnt work here, we need a proper menu to control this
 				if (info.Key == ConsoleKey.F1)
 				{
-					//CompanyMenu companyMenu = new CompanyMenu();
+					//CustommerScreen customerScreen = new CustomerScreen();
 					this.EditCustomer();
 				}
 				if (info.Key == ConsoleKey.F2)
@@ -111,16 +113,18 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("Kundens efternavn: "); selected.LastName = Console.ReadLine();
 				Console.WriteLine("Email "); selected.Email = Console.ReadLine();
 				Console.WriteLine("Tlf nr: "); selected.Phone = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("Adresse: "); selected.Adress.Street = Console.ReadLine();
-				Console.WriteLine("adresse nr: "); selected.Adress.Number = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("By: "); selected.Adress.City = Console.ReadLine();
-				Console.WriteLine("Postnummer: "); selected.Adress.ZipCode = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Adresse: "); selected.adress.Street = Console.ReadLine();
+				Console.WriteLine("adresse nr: "); selected.adress.Number = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("By: "); selected.adress.City = Console.ReadLine();
+				Console.WriteLine("Postnummer: "); selected.adress.ZipCode = Convert.ToInt32(Console.ReadLine());
 
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
 			}
+
+			Draw();
 
 			//Run through each thing that needs to be edited in the employee
 			
@@ -139,10 +143,10 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
 			Console.WriteLine("Navn: " + selected.FullName);
 			Console.WriteLine("Efternavn: " + selected.LastName);
-			//Console.WriteLine("Adresse: " + selected.Adress.Street);
-			//Console.WriteLine("Husnummer: " + selected.Adress.Number);
-			//Console.WriteLine("Postnummer: " + selected.Adress.ZipCode);
-			//Console.WriteLine("By: " + selected.Adress.City);
+			Console.WriteLine("Adresse: " + selected.adress.Street);
+			Console.WriteLine("Husnummer: " + selected.adress.Number);
+			Console.WriteLine("Postnummer: " + selected.adress.ZipCode);
+			Console.WriteLine("By: " + selected.adress.City);
 			Console.WriteLine("Telefonnummer: " + selected.Phone);
 			Console.WriteLine("Email: " + selected.Email);
 		}
@@ -156,7 +160,7 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("Opsætning af nye virksomhed");
 				Console.WriteLine("-----------------------------");
 				Console.WriteLine("Indtast Venligst virksomhedens oplysninger");
-				//Run through each variable needed to create a new company
+				//Run through each variable needed to create a new Customer
 				Console.WriteLine("Kundenummer: "); var kundeNummer = Convert.ToInt32(Console.ReadLine());
 				Console.WriteLine("Kundens fornavn: "); var fornavn = Console.ReadLine();
 				Console.WriteLine("Kundens efternavn: "); var efterNavn = Console.ReadLine();
@@ -168,6 +172,7 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("Postnummer: "); var postnummer = Convert.ToInt32(Console.ReadLine());
 
 				listPage.Add(new Customer(kundeNummer, fornavn, efterNavn, email, tlfNr, adresse, adresseNr, postnummer, by));
+				
 
 			}
 			catch (Exception ex)
