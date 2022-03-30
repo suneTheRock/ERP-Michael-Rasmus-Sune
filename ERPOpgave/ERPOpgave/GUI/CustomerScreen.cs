@@ -157,9 +157,9 @@ namespace ERPOpgave.GUI
 
 			try
             {
-				Console.WriteLine("Opsætning af nye virksomhed");
+				Console.WriteLine("Opsætning af nye kundeoplysning");
 				Console.WriteLine("-----------------------------");
-				Console.WriteLine("Indtast Venligst virksomhedens oplysninger");
+				Console.WriteLine("Indtast Venligst kundens oplysninger");
 				//Run through each variable needed to create a new Customer
 				Console.WriteLine("Kundenummer: "); var kundeNummer = Convert.ToInt32(Console.ReadLine());
 				Console.WriteLine("Kundens fornavn: "); var fornavn = Console.ReadLine();
