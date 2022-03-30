@@ -14,7 +14,7 @@ namespace ERPOpgave.GUI
 		public ListPage<Customer> listPage = new ListPage<Customer>();
 		protected Customer selected;
 		public Adress adress = new Adress();
-		public Adress ad;
+		
 		public override string Title { get; set; } = "LNE Security A/S";
 		public string CustomerNumber { get; set; } = "Kundenummer";
 		public string Name { get; set; } = "Navn";
@@ -24,6 +24,8 @@ namespace ERPOpgave.GUI
 		public string adresse { get; set; } = "Adresse";
 
 		public string LastOrderDate { get; set; } = "Dato for sidste køb";
+
+		
 
 		public CustomerScreen()
         {
@@ -53,9 +55,7 @@ namespace ERPOpgave.GUI
 			listPage.AddColumn(Phonenumber, "Phone");
 			listPage.AddColumn(Email, "Email");
 			listPage.AddColumn(LastOrderDate.ToString(), "LastOrder");
-			//listPage.AddColumn(adresse, "ad.Street");
 			
-
 			//Draw to see this printed out
 			listPage.Draw();
 
@@ -130,7 +130,7 @@ namespace ERPOpgave.GUI
 			
 			//listPage.
 			//This isn't going to work, I need to figure out how to target the selected company for its own edit.
-			//listPage.Select() = new Company(name, companyStreet, companyStreetNumber, postNumber, companyCity, companyCountry, companyCurrency)
+			
 		}
 
 		public void ShowDetailsOfcustomerFromList()
@@ -141,7 +141,7 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("Kundens Detalje ");
 			Console.WriteLine("																				Tryk Esc + Enter for at gå tilbage til Menuen");
 			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
-			Console.WriteLine("Navn: " + selected.FullName);
+			Console.WriteLine("Navn: " + selected.FirstName);
 			Console.WriteLine("Efternavn: " + selected.LastName);
 			Console.WriteLine("Adresse: " + selected.adress.Street);
 			Console.WriteLine("Husnummer: " + selected.adress.Number);
@@ -166,12 +166,12 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("Kundens efternavn: "); var efterNavn = Console.ReadLine();
 				Console.WriteLine("Email: "); var email = Console.ReadLine();
 				Console.WriteLine("Tlf nr: "); var tlfNr = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("Adresse: "); var adresse = Console.ReadLine();
+				Console.WriteLine("Adresse: "); var adressen = Console.ReadLine();
 				Console.WriteLine("Adresse nr: "); var adresseNr = Convert.ToInt32(Console.ReadLine());
 				Console.WriteLine("By: "); var by = Console.ReadLine();
 				Console.WriteLine("Postnummer: "); var postnummer = Convert.ToInt32(Console.ReadLine());
 
-				listPage.Add(new Customer(kundeNummer, fornavn, efterNavn, email, tlfNr, adresse, adresseNr, postnummer, by));
+				listPage.Add(new Customer(kundeNummer, fornavn, efterNavn, email, tlfNr, adressen, adresseNr, postnummer, by));
 				
 
 			}
@@ -190,6 +190,8 @@ namespace ERPOpgave.GUI
 			Draw();
 
 		}
+
+		
 	}
 
 		
