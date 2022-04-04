@@ -19,6 +19,7 @@ namespace ERPOpgave.GUI
 		public override string Title { get; set; } = "LNE Security A/S";
 		public string CustomerNumber { get; set; } = "Kundenummer";
 		public string Name { get; set; } = "Navn";
+		public string EfterNavn { get; set; } = "Efternavn";
 		public string Phonenumber { get; set; } = "TelefonNummer";
 		public string Email { get; set; } = "E-Mail";
 
@@ -53,7 +54,8 @@ namespace ERPOpgave.GUI
 			
 			//We add a Column with (<A title taken from above> , <"The Variablename we gave them in their own class">)
 			listPage.AddColumn(CustomerNumber, "CustomerID");
-			listPage.AddColumn(Name, "FullName");
+			listPage.AddColumn(Name, "FirstName");
+			listPage.AddColumn(EfterNavn, "LastName");
 			listPage.AddColumn(Phonenumber, "Phone");
 			listPage.AddColumn(Email, "Email");
 			listPage.AddColumn(LastOrderDate.ToString(), "LastOrder");
@@ -65,6 +67,7 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("Tryk på F1 for at redigere en kunde");
 			Console.WriteLine("Tryk på F2 for at oprette en kunde");
 			Console.WriteLine("Tryk på F5 for at kunde detalje");
+			//CustomerScreen customerScreen = new CustomerScreen();
 
 			bool loop = true;
 			while (loop)
@@ -79,8 +82,7 @@ namespace ERPOpgave.GUI
 				}
 				if (info.Key == ConsoleKey.F2)
 				{
-					CustomerScreen customerScreen = new CustomerScreen();
-					customerScreen.AddCustomerToList();
+					this.AddCustomerToList();
 				}
 				if(info.Key == ConsoleKey.F5)
                 {
@@ -92,7 +94,7 @@ namespace ERPOpgave.GUI
 				if(info.Key == ConsoleKey.F4)
 				{
 					Clear();
-					listPage.Draw();
+					Draw();
                 }
 				if(info.Key == ConsoleKey.Escape)
                 {
@@ -181,6 +183,7 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("By: "); var by = Console.ReadLine();
 				Console.WriteLine("Postnummer: "); var postnummer = Convert.ToInt32(Console.ReadLine());
 
+				
 				Adress adr = new Adress(by,adresseNr,adressen, postnummer);
 				listPage.Add(new Customer(kundeNummer, fornavn, efterNavn, email, tlfNr, adr));
 				
