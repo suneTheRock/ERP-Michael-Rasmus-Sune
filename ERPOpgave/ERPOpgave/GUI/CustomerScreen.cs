@@ -13,7 +13,7 @@ namespace ERPOpgave.GUI
     {
 		public ListPage<Customer> listPage = new ListPage<Customer>();
 		protected Customer selected;
-		public Adress adress = new Adress();
+		
 		
 		public override string Title { get; set; } = "LNE Security A/S";
 		public string CustomerNumber { get; set; } = "Kundenummer";
@@ -113,10 +113,11 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("Kundens efternavn: "); selected.LastName = Console.ReadLine();
 				Console.WriteLine("Email "); selected.Email = Console.ReadLine();
 				Console.WriteLine("Tlf nr: "); selected.Phone = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("Adresse: "); selected.adress.Street = Console.ReadLine();
-				Console.WriteLine("adresse nr: "); selected.adress.Number = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("By: "); selected.adress.City = Console.ReadLine();
-				Console.WriteLine("Postnummer: "); selected.adress.ZipCode = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Adresse: "); selected.Adress.Street = Console.ReadLine();
+				Console.WriteLine("adresse nr: "); selected.Adress.Number = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("By: "); selected.Adress.City = Console.ReadLine();
+				Console.WriteLine("Postnummer: "); selected.Adress.ZipCode = Convert.ToInt32(Console.ReadLine());
+
 
 			}
 			catch (Exception ex)
@@ -143,10 +144,10 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
 			Console.WriteLine("Navn: " + selected.FirstName);
 			Console.WriteLine("Efternavn: " + selected.LastName);
-			Console.WriteLine("Adresse: " + selected.adress.Street);
-			Console.WriteLine("Husnummer: " + selected.adress.Number);
-			Console.WriteLine("Postnummer: " + selected.adress.ZipCode);
-			Console.WriteLine("By: " + selected.adress.City);
+			Console.WriteLine("Adresse: " + selected.Adress.Street);
+			Console.WriteLine("Husnummer: " + selected.Adress.Number);
+			Console.WriteLine("Postnummer: " + selected.Adress.ZipCode);
+			Console.WriteLine("By: " + selected.Adress.City);
 			Console.WriteLine("Telefonnummer: " + selected.Phone);
 			Console.WriteLine("Email: " + selected.Email);
 		}
@@ -171,7 +172,8 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("By: "); var by = Console.ReadLine();
 				Console.WriteLine("Postnummer: "); var postnummer = Convert.ToInt32(Console.ReadLine());
 
-				listPage.Add(new Customer(kundeNummer, fornavn, efterNavn, email, tlfNr, adressen, adresseNr, postnummer, by));
+				Adress adr = new Adress(by,adresseNr,adressen, postnummer);
+				listPage.Add(new Customer(kundeNummer, fornavn, efterNavn, email, tlfNr, adr));
 				
 
 			}
