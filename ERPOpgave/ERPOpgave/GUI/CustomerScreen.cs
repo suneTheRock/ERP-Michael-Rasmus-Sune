@@ -13,6 +13,7 @@ namespace ERPOpgave.GUI
     {
 		public ListPage<Customer> listPage = new ListPage<Customer>();
 		protected Customer selected;
+		public Adress adress;
 		
 		
 		public override string Title { get; set; } = "LNE Security A/S";
@@ -30,7 +31,7 @@ namespace ERPOpgave.GUI
 		public CustomerScreen()
         {
 			//Call Customer dummies method to create users for Test.
-			CustomerDummies();
+			//CustomerDummies();
         }
 
 		public void CustomerDummies()
@@ -39,6 +40,7 @@ namespace ERPOpgave.GUI
 			listPage.Add(new Customer(1, "Mailadress1@dot.com", "Tom", "Jerrison", 29292929));
 			listPage.Add(new Customer(2, "Mailadress2@dot.com", "Ben", "Jerrison", 292992929));
 			listPage.Add(new Customer(3, "Mailadress3@dot.com", "Jerry", "Tommison", 88888888));
+			
 	//listPage.Add(new Customer(1, "sune", "bech", "sune401@hotmail.dk", 23123321, "forsend", 999, 200, "svvcc"));
 		}
 		protected override void Draw()
@@ -85,6 +87,13 @@ namespace ERPOpgave.GUI
 					this.ShowDetailsOfcustomerFromList();
 
 				}
+
+				//tilbage til Hovedmenuen
+				if(info.Key == ConsoleKey.F4)
+				{
+					Clear();
+					listPage.Draw();
+                }
 				if(info.Key == ConsoleKey.Escape)
                 {
 					loop = false;
@@ -140,7 +149,7 @@ namespace ERPOpgave.GUI
 			selected = listPage.Select();
 			Clear();
 			Console.WriteLine("Kundens Detalje ");
-			Console.WriteLine("																				Tryk Esc + Enter for at gå tilbage til Menuen");
+			Console.WriteLine("																				Tryk F4 for at gå tilbage til Menuen");
 			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
 			Console.WriteLine("Navn: " + selected.FirstName);
 			Console.WriteLine("Efternavn: " + selected.LastName);
