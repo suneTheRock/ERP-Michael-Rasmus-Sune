@@ -7,31 +7,39 @@ using System.Threading.Tasks;
 
 namespace ERPOpgave.Models
 {
-    internal class Person
+    public class Person
     {
+        public Person(string email, string firstName, string lastName, int phone)
+        {
+            this.Email = email;
+            this.FirstName = firstName;
+            this.FullName = $"{firstName} {lastName}";
+            this.LastName = lastName;
+            this.Phone = phone;
+        }
         public Person(Adress adress, ContactInfo contactInfo, string email, string firstName, string lastName, int phone)
         {
-            Adress = adress;
-            ContactInfo = contactInfo;
-            Email = email;
-            FirstName = firstName;
-            FullName = $"{firstName} {lastName}";
-            LastName = lastName;
-            Phone = phone;
+            this.Adress = adress;
+            this.ContactInfo = contactInfo;
+            this.Email = email;
+            this.FirstName = firstName;
+            this.FullName = $"{firstName} {lastName}";
+            this.LastName = lastName;
+            this.Phone = phone;
         }
 
-        internal PersonalInfo.Adress Adress { get => default; set { } }
+        internal PersonalInfo.Adress Adress { get; set; }
 
-        internal PersonalInfo.ContactInfo ContactInfo { get => default; set { } }
+        internal PersonalInfo.ContactInfo ContactInfo { get; set; }
 
-        public string Email { get => default; set { } }
+        public string Email { get; set; }
 
-        public string FirstName { get => default; set { } }
+        public string FirstName { get; set; }
 
-        public string FullName { get => default; set { } }
+        public string FullName { get; set; }
 
-        public string LastName { get => default; set { } }
+        public string LastName { get; set; }
 
-        public int Phone { get => default; set { } }
+        public int Phone { get; set; }
     }
 }
