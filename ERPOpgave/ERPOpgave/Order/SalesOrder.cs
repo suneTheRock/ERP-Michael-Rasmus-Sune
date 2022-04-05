@@ -6,72 +6,45 @@ using System.Threading.Tasks;
 
 namespace ERPOpgave.Order
 {
-    internal class SalesOrder
+    public class SalesOrder
     {
-
-        internal Models.Customer Customer
+        public SalesOrder(int orderID, DateTime date)
         {
-            get => default;
-            set
-            {
-            }
+            OrderNumber = orderID;
+            Created = date;
+            //TODO:
+            //CustomerID, CustomerName, Order Amount
+            
         }
-        internal List<Orderline> Orderlines;
+        internal Models.Customer Customer { get; set; }
 
-        internal Orderline Orderline
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        internal List<Orderline> Lines { get; set; }
 
-        public int Complete
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        internal Orderline Orderline { get; set; }       
+        public DateTime Complete { get; set; }
 
-        public int Created
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public DateTime Created { get; set; }
 
-        public int DeliveryAdress
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public string DeliveryAdress { get; set; }
+        public int ID { get; set; } // TODO: Skal den her være her??????
 
-        public int ID
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public int OrderNumber { get; set; }
+        public int OrderNames { get; set; }
 
-        public int Lines
+        public string FullName { get { return Customer.FullName; } }
+        public int CustomerID { get { return Customer.CustomerNumber; } }
+
+        public decimal Amount { get { return GetAmount(); } }
+
+        public decimal GetAmount()
         {
-            get => default;
-            set
+            decimal fullamount =0;
+            for (int i=0; i < Lines.Count; i++)
             {
+                fullamount =+ Orderline.Total;
             }
-        }
-        public int OrderNumber;
-        public int OrderNames
-        {
-            get => default;
-            set
-            {
-            }
+            return fullamount;
+            
         }
     }
 }
