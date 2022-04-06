@@ -8,7 +8,6 @@ namespace ERPOpgave.Order
 {
     public class SalesOrder
     {
-<<<<<<< HEAD
         public SalesOrder(int orderID, DateTime date)
         {
             OrderNumber = orderID;
@@ -47,23 +46,5 @@ namespace ERPOpgave.Order
             return fullamount;
             
         }
-=======
-        public enum Complete
-        {
-            Yes,
-            No
-        }
-        internal Models.Customer Customer { get => default; set { } }
-
-        internal List<Orderline> Orderlines;
-        internal Orderline Orderline { get => default; set { } }
-        public Complete Completed { get => default; set { } }
-        public DateTime Created { get => default; set { } }
-        public string DeliveryAdress { get => default; set { } }
-        public int ID { get => default; set { } }
-        public int Lines { get => default; set { } }
-        public int OrderNumber;
-        public string OrderNames { get => default; set { } }
->>>>>>> origin/Customer
     }
 }

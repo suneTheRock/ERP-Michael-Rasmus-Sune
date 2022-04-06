@@ -8,7 +8,6 @@ namespace ERPOpgave.Order
 {
     internal class Orderline
     {
-<<<<<<< HEAD
         public int ItemNumber { get; set; }
 
         public string ItemText { get; set; }
@@ -23,19 +22,5 @@ namespace ERPOpgave.Order
         public Products.Product Product { get; set; }
 
         public decimal Total { get { return Quantity * UnitPrice; } }
-=======
-        public int ItemNumber { get => default; set { } }
-
-        public string ItemText { get => default; set { } }
-
-        public int Property { get => default; set { } }
-
-        public int Quantity { get => default; set { } }
-
-        public int Units { get => default; set { } }
-
-        public decimal UnitPrice { get => default; set { } }
-        internal Products.Product Product { get => default; set { } }
->>>>>>> origin/Customer
     }
 }

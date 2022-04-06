@@ -3,26 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using ERPOpgave.Products;
 using ERPOpgave.Order;
-=======
 using ERPOpgave.Models;
->>>>>>> origin/Customer
 
 namespace ERPOpgave.Data
 {
     partial class Database
     {
-<<<<<<< HEAD
         public Product p;
         public List<Product> productList = new List<Product>();
         public List<SalesOrder> orderList = new List<SalesOrder>();
 
+        /// <summary>
+        /// TEMPOARY
+        public Customer c;
+        public List<Customer> customerList = new List<Customer>();
+        /// </summary>
 
-=======
-        List<Customer> customers = new List<Customer>();
->>>>>>> origin/Customer
         public static Database Instance { get; private set; }
         static Database()
         {
@@ -105,7 +103,7 @@ namespace ERPOpgave.Data
         //Getting Customer based on ID
         public Customer GetCustomerFromID(int i)
         {
-            foreach(Customer customer in customers)
+            foreach(Customer customer in customerList)
             {
                 if (i == customer.CustomerID) { return customer; }
             }
@@ -114,23 +112,23 @@ namespace ERPOpgave.Data
         //Get all Customers
         public List<Customer> GetAllCustomers()
         {
-            return customers;
+            return customerList;
         }
 
         //Insert Customer
         public void InsertCustomer(Customer customername)
         {
-            customers.Add(customername);
+            customerList.Add(customername);
         }
 
         //Update Customer by ID
         public void UpdateCustomerByID(Customer customername, int id)
         {
-            for (int i = 0; i < customers.Count; i++)
+            for (int i = 0; i < customerList.Count; i++)
             {
-                if (id == customers[i].CustomerID)
+                if (id == customerList[i].CustomerID)
                 {
-                    customers[i] = customername;
+                    customerList[i] = customername;
                 }
             }
             throw new Exception("No Customer by that ID");
@@ -139,11 +137,11 @@ namespace ERPOpgave.Data
         //Delete Customer by ID
         public void DeleteCustomerByID(Customer customername, int id)
         {
-            for (int i = 0; i < customers.Count; i++)
+            for (int i = 0; i < customerList.Count; i++)
             {
-                if (id == customers[i].CustomerID)
+                if (id == customerList[i].CustomerID)
                 {
-                    customers.RemoveAt(i);
+                    customerList.RemoveAt(i);
                 }
             }
             throw new Exception("No Customer by that ID");
