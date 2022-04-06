@@ -23,14 +23,66 @@ namespace ERPOpgave.Data
         /// </summary>
 
         public static Database Instance { get; private set; }
-<<<<<<< HEAD
-        static Database()
+
+        SqlConnection conn = null;
+        static  Database() 
         {
             Instance = new Database();
-
-
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            builder.DataSource = "docker.data.techcollege.dk";
+            builder.UserID = "H1PD021122_Gruppe2";
+            builder.Password = "H1PD021122_Gruppe2";
+            Instance.conn = new SqlConnection(builder.ConnectionString);
+            Instance.conn.Open();
+        }
+        //Getting Customer based on ID
+        public Customer GetCustomerFromID(int i)
+        {
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT firstName FROM Customers JOIN";
+            foreach(Customer customer in customerList)
+            {
+                if (i == customer.CustomerID) { return customer; }
+            }
+            throw new Exception("No Customer by that ID");           
+        }
+        //Get all Customers
+        public List<Customer> GetAllCustomers()
+        {
+            return customerList;
         }
 
+        //Insert Customer
+        public void InsertCustomer(Customer customername)
+        {
+            customerList.Add(customername);
+        }
+
+        //Update Customer by ID
+        public void UpdateCustomerByID(Customer customername, int id)
+        {
+            for (int i = 0; i < customerList.Count; i++)
+            {
+                if (id == customerList[i].CustomerID)
+                {
+                    customerList[i] = customername;
+                }
+            }
+            throw new Exception("No Customer by that ID");
+        }
+
+        //Delete Customer by ID
+        public void DeleteCustomerByID(Customer customername, int id)
+        {
+            for (int i = 0; i < customerList.Count; i++)
+            {
+                if (id == customerList[i].CustomerID)
+                {
+                    customerList.RemoveAt(i);
+                }
+            }
+            throw new Exception("No Customer by that ID");
+        }
         public Product GetProductById(int id)
         {
             foreach (Product p in productList)
@@ -90,7 +142,7 @@ namespace ERPOpgave.Data
                 {
                     productList.Remove(p);
                 }
-            }         
+            }
         }
         public void DeleteSalesOrderById(int id)
         {
@@ -100,74 +152,7 @@ namespace ERPOpgave.Data
                 {
                     orderList.Remove(order);
                 }
-            }               
-=======
-        SqlConnection conn = null;
-        static  Database() 
-        {
-            Instance = new Database();
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "docker.data.techcollege.dk";
-            builder.UserID = "H1PD021122_Gruppe2";
-            builder.Password = "H1PD021122_Gruppe2";
-            Instance.conn = new SqlConnection(builder.ConnectionString);
-            Instance.conn.Open();
-            
-
-            
->>>>>>> Customer
-        }
-        //Getting Customer based on ID
-        public Customer GetCustomerFromID(int i)
-        {
-<<<<<<< HEAD
-            foreach(Customer customer in customerList)
-=======
-            SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT firstName FROM Customers JOIN";
-            foreach(Customer customer in customers)
->>>>>>> Customer
-            {
-                if (i == customer.CustomerID) { return customer; }
             }
-            throw new Exception("No Customer by that ID");           
-        }
-        //Get all Customers
-        public List<Customer> GetAllCustomers()
-        {
-            return customerList;
-        }
-
-        //Insert Customer
-        public void InsertCustomer(Customer customername)
-        {
-            customerList.Add(customername);
-        }
-
-        //Update Customer by ID
-        public void UpdateCustomerByID(Customer customername, int id)
-        {
-            for (int i = 0; i < customerList.Count; i++)
-            {
-                if (id == customerList[i].CustomerID)
-                {
-                    customerList[i] = customername;
-                }
-            }
-            throw new Exception("No Customer by that ID");
-        }
-
-        //Delete Customer by ID
-        public void DeleteCustomerByID(Customer customername, int id)
-        {
-            for (int i = 0; i < customerList.Count; i++)
-            {
-                if (id == customerList[i].CustomerID)
-                {
-                    customerList.RemoveAt(i);
-                }
-            }
-            throw new Exception("No Customer by that ID");
         }
     }
 }
