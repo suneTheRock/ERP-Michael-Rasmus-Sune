@@ -10,21 +10,22 @@ namespace ERPOpgave.Models
     public class Customer : Person
     {
         
-        public Customer(Adress adress, ContactInfo contactInfo, string email, string firstName, string lastName, int phone) : base(adress, contactInfo, email, firstName, lastName, phone)
-        {
-        }
-        public Customer(int customerid, string email, string firstName, string lastName, int phone) :base(email, firstName, lastName,phone)
-        {
-            this.CustomerID = customerid;
-            this.Email = email;
-            this.FullName = $"{firstName} {lastName}";
-            this.Phone = phone;
+        //public Customer(Adress adress, ContactInfo contactInfo, string email, string firstName, string lastName, int phone) : base(adress, contactInfo, email, firstName, lastName, phone)
+        //{
+        //}
+        //public Customer(int customerid, string email, string firstName, string lastName, int phone) :base(email, firstName, lastName,phone)
+        //{
+        //    this.CustomerID = customerid;
+        //    this.Email = email;
+        //    this.FullName = $"{firstName} {lastName}";
+        //    this.Phone = phone;
 
-        }
+        //}
 
-        public Customer(int customerId, string firstname, string lastName, string email, int phone, Adress adress) :base(email, firstname, lastName, phone)
+        public Customer(int customerId, string firstName, string lastName, string email, int phone, Adress adress) :base(email, firstName, lastName, phone)
         {
             this.CustomerID=customerId;
+            this.FullName = $"{firstName} {lastName}";
             this.Adress = adress;
             this.Phone = phone;
         }

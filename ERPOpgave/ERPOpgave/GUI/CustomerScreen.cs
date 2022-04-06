@@ -38,9 +38,9 @@ namespace ERPOpgave.GUI
 		public void CustomerDummies()
         {
 			//Add all the things you want on that list, with a string to represent them on the menu screen.
-			listPage.Add(new Customer(1, "Mailadress1@dot.com", "Tom", "Jerrison", 29292929));
-			listPage.Add(new Customer(2, "Mailadress2@dot.com", "Ben", "Jerrison", 292992929));
-			listPage.Add(new Customer(3, "Mailadress3@dot.com", "Jerry", "Tommison", 88888888));
+			//listPage.Add(new Customer(1, "Mailadress1@dot.com", "Tom", "Jerrison", 29292929));
+			//listPage.Add(new Customer(2, "Mailadress2@dot.com", "Ben", "Jerrison", 292992929));
+			//listPage.Add(new Customer(3, "Mailadress3@dot.com", "Jerry", "Tommison", 88888888));
 			
 	//listPage.Add(new Customer(1, "sune", "bech", "sune401@hotmail.dk", 23123321, "forsend", 999, 200, "svvcc"));
 		}

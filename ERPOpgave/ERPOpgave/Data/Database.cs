@@ -30,7 +30,18 @@ namespace ERPOpgave.Data
         public Customer GetCustomerFromID(int i)
         {
             SqlCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "SELECT firstName FROM Customers JOIN";
+            // det er vores sql string som tager i og finder alle informationer vi skal bruge for at lave et customer objekt.
+            cmd.CommandText = $"select firstName, lastName FROM Customers JOIN where {i}= customerID";
+            //vi skal bruge reader til at læse information 
+
+            // brug reader til at lave customer objekt
+            //Customer customer = new Customer()
+
+            //til sidst returneres der customer objektet.
+            //return customers;
+
+            
+
             foreach(Customer customer in customers)
             {
                 if (i == customer.CustomerID) { return customer; }
@@ -40,6 +51,9 @@ namespace ERPOpgave.Data
         //Get all Customers
         public List<Customer> GetAllCustomers()
         {
+            SqlCommand sql = conn.CreateCommand();
+            sql.CommandText = "select firstName, lastName, email FROM Persons";
+            sql.CommandType = System.Data.CommandType.Text;
             return customers;
         }
 
