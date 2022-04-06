@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ERPOpgave.Products;
 using ERPOpgave.Order;
 using ERPOpgave.Models;
+using System.Data.SqlClient;
 
 namespace ERPOpgave.Data
 {
@@ -22,6 +23,7 @@ namespace ERPOpgave.Data
         /// </summary>
 
         public static Database Instance { get; private set; }
+<<<<<<< HEAD
         static Database()
         {
             Instance = new Database();
@@ -99,11 +101,32 @@ namespace ERPOpgave.Data
                     orderList.Remove(order);
                 }
             }               
+=======
+        SqlConnection conn = null;
+        static  Database() 
+        {
+            Instance = new Database();
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+            builder.DataSource = "docker.data.techcollege.dk";
+            builder.UserID = "H1PD021122_Gruppe2";
+            builder.Password = "H1PD021122_Gruppe2";
+            Instance.conn = new SqlConnection(builder.ConnectionString);
+            Instance.conn.Open();
+            
+
+            
+>>>>>>> Customer
         }
         //Getting Customer based on ID
         public Customer GetCustomerFromID(int i)
         {
+<<<<<<< HEAD
             foreach(Customer customer in customerList)
+=======
+            SqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT firstName FROM Customers JOIN";
+            foreach(Customer customer in customers)
+>>>>>>> Customer
             {
                 if (i == customer.CustomerID) { return customer; }
             }
