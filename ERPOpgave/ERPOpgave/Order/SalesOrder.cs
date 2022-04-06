@@ -32,7 +32,7 @@ namespace ERPOpgave.Order
         public int OrderNames { get; set; }
 
         public string FullName { get { return Customer.FullName; } }
-        public int CustomerID { get { return Customer.CustomerNumber; } }
+        public int CustomerID { get { return Customer.CustomerID; } }
 
         public decimal Amount { get { return GetAmount(); } }
 
