@@ -1,12 +1,14 @@
 ﻿using ERPOpgave.PersonalInfo;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ERPOpgave.Models
 {
+    
     public class Customer : Person
     {
 
@@ -21,7 +23,7 @@ namespace ERPOpgave.Models
         //    this.Phone = phone;
 
         //}
-
+        
         public Customer(int customerId, string firstName, string lastName, string email, int phone, Adress adress) :base(email, firstName, lastName, phone)
         {
             this.CustomerID=customerId;
@@ -29,6 +31,7 @@ namespace ERPOpgave.Models
             this.Adress = adress;
             this.Phone = phone;
         }
+        [Column("customerID")]
         public int CustomerID { get; set; }
         public int CustomerNumber { get; set; }
         public DateTime LastOrder { get; set; }

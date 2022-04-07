@@ -10,28 +10,24 @@ using System.Data;
 
 namespace ERPOpgave.Data
 {
-    public partial class Database
+    public static partial class Database
     {
-        List<Customer> customers = new List<Customer>();
-        public static Database Instance { get; private set; }
-        SqlConnection conn = null;
-        static  Database() 
+        static List<Customer> customers = new List<Customer>();
+        //private static Database Instance { get; set; }
+        static SqlConnection conn = null;
+        public static void Init() 
         {
-            Instance = new Database();
+            //Instance = new Database();
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder.DataSource = "docker.data.techcollege.dk";
             builder.UserID = "H1PD021122_Gruppe2";
             builder.Password = "H1PD021122_Gruppe2";
-            Instance.conn = new SqlConnection(builder.ConnectionString);
-            Instance.conn.Open();
-            
-
-            
-
+            conn = new SqlConnection(builder.ConnectionString);
+            conn.Open();
             
         }
         //Getting Customer based on ID
-        public Customer GetCustomerFromID(int i)
+        public static Customer GetCustomerFromID(int i)
         {
             SqlCommand cmd = conn.CreateCommand();
             // det er vores sql string som tager i og finder alle informationer vi skal bruge for at lave et customer objekt.
@@ -53,15 +49,23 @@ namespace ERPOpgave.Data
             throw new Exception("No Customer by that ID");           
         }
         //Get all Customers
-        public List<Customer> GetAllCustomers()
+        public static List<Customer> GetAllCustomers()
         {
-            SqlCommand sql = new SqlCommand("SELECT * FROM Customers", conn);
+            SqlCommand sql = new SqlCommand("FROM [H1PD021122_Gruppe2].[dbo].[Customers] " +
+                "JOIN[H1PD021122_Gruppe2].[dbo].[Persons] " +
+                "ON Customers.person_ID = Persons.personID" +     
+                "JOIN[H1PD021122_Gruppe2].[dbo].[Adress]" +
+                "ON Customers.Adress_ID = Adress.adressID" +
+                "JOIN[H1PD021122_Gruppe2].[dbo].[ContactInfos]" +
+                "ON Customers.contactInfo_ID = ContactInfos.contactInfoID", conn);
             SqlDataReader reader = sql.ExecuteReader();
             while(reader.Read())
             {
                 for(int i = 0; i < reader.FieldCount; i++)
                 {
-                    customers.Add((Customer)reader.GetValue(i));
+                    Console.WriteLine(reader.GetValue(i));
+                    
+                    //customers.Add((Customer)reader.GetValue(i));
                 }
             }
             
@@ -69,13 +73,13 @@ namespace ERPOpgave.Data
         }
 
         //Insert Customer
-        public void InsertCustomer(Customer customername)
+        public static void InsertCustomer(Customer customername)
         {
             customers.Add(customername);
         }
 
         //Update Customer by ID
-        public void UpdateCustomerByID(Customer customername, int id)
+        public static void UpdateCustomerByID(Customer customername, int id)
         {
             for (int i = 0; i < customers.Count; i++)
             {
@@ -88,7 +92,7 @@ namespace ERPOpgave.Data
         }
 
         //Delete Customer by ID
-        public void DeleteCustomerByID(Customer customername, int id)
+        public static void DeleteCustomerByID(Customer customername, int id)
         {
             for (int i = 0; i < customers.Count; i++)
             {
