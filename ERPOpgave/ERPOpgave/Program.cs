@@ -4,13 +4,20 @@ using ERPOpgave.Data;
 using ERPOpgave.Models;
 
 
-    //TitleScreen titlescreen = new TitleScreen();
-    //Screen.Display(titlescreen);
-    //CustomerScreen titlescreen = new CustomerScreen();
-    //Screen.Display(titlescreen);
-    Database.Init();
-    List<Customer> customers = Database.GetAllCustomers();
-    Console.WriteLine(customers);
+//TitleScreen titlescreen = new TitleScreen();
+//Screen.Display(titlescreen);
+Database.Init();
+CustomerScreen titlescreen = new CustomerScreen();
+List<Customer> customers = Database.GetAllCustomers();
+Database.GetCustomerFromID(2);
+titlescreen.listPage.Add(Database.GetCustomerFromID(2));
+Screen.Display(titlescreen);
+    
+    
+
+
+    
+    
 
 
 
