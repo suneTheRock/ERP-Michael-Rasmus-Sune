@@ -1,5 +1,6 @@
 ﻿using ERPOpgave.Models;
 using ERPOpgave.PersonalInfo;
+using ERPOpgave.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,8 @@ namespace ERPOpgave.GUI
         {
 			//Call Customer dummies method to create users for Test.
 			//CustomerDummies();
+			
+			
 			
 
 		}

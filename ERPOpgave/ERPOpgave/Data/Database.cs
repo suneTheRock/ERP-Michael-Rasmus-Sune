@@ -22,6 +22,7 @@ namespace ERPOpgave.Data
             builder.Password = "H1PD021122_Gruppe2";
             Instance.conn = new SqlConnection(builder.ConnectionString);
             Instance.conn.Open();
+            
 
             
 
@@ -52,7 +53,7 @@ namespace ERPOpgave.Data
         //Get all Customers
         public List<Customer> GetAllCustomers()
         {
-            SqlCommand sql = new SqlCommand("SELECT * FROM Persons", conn);
+            SqlCommand sql = new SqlCommand("SELECT * FROM Customers", conn);
             SqlDataReader reader = sql.ExecuteReader();
             while(reader.Read())
             {
