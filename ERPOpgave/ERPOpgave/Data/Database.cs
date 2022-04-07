@@ -4,14 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ERPOpgave.Products;
-
+using ERPOpgave.Order;
+using ERPOpgave.Models;
 
 namespace ERPOpgave.Data
 {
-    public class Database
+    partial class Database
     {
         public Product p;
         public List<Product> productList = new List<Product>();
+        public List<SalesOrder> orderList = new List<SalesOrder>();
+
+        /// <summary>
+        /// TEMPOARY
+        public Customer c;
+        public List<Customer> customerList = new List<Customer>();
+        /// </summary>
 
         public static Database Instance { get; private set; }
         static Database()
@@ -30,35 +38,113 @@ namespace ERPOpgave.Data
             }
             return p;
         }
+        public Product GetOrderById(int id)
+        {
+            foreach (Product p in productList)
+            {
+                if (p.ProductId == id)
+                    return p;
+            }
+            return p;
+        }
 
-        public Product GetAllProducts()
+        public void GetAllProducts()
         {
             foreach (Product p in productList)
             {
                 Console.WriteLine(p);
             }
-            return p;
 
         }
-
-        public void AddProduct()
+        public void GetAllSalesOrder()
         {
-            productList.Add(p);
+            foreach (SalesOrder order in orderList)
+            {
+                Console.WriteLine(order);
+            }
         }
-
+        public void AddProduct(Product product)
+        {
+            productList.Add(product);
+        }
+        public void AddSalesOrder(SalesOrder order)
+        {
+            orderList.Add(order);
+        }
         public void UpdateProduct(Product p, int Id)
         {
             p.ProductId = Id;
         }
+        public void UpdateProduct(SalesOrder order, int Id)
+        {
+            order.ID = Id;
+        }
 
         public void DeleteProductById(int id)
         {
-            if (p.ProductId == id)
+            foreach (Product p in productList)
             {
-                productList.Remove(p);
+                if (p.ProductId == id)
+                {
+                    productList.Remove(p);
+                }
+            }         
+        }
+        public void DeleteSalesOrderById(int id)
+        {
+            foreach (SalesOrder order in orderList)
+            {
+                if (order.ID == id)
+                {
+                    orderList.Remove(order);
+                }
+            }               
+        }
+        //Getting Customer based on ID
+        public Customer GetCustomerFromID(int i)
+        {
+            foreach(Customer customer in customerList)
+            {
+                if (i == customer.CustomerID) { return customer; }
             }
-
+            throw new Exception("No Customer by that ID");           
+        }
+        //Get all Customers
+        public List<Customer> GetAllCustomers()
+        {
+            return customerList;
         }
 
+        //Insert Customer
+        public void InsertCustomer(Customer customername)
+        {
+            customerList.Add(customername);
+        }
+
+        //Update Customer by ID
+        public void UpdateCustomerByID(Customer customername, int id)
+        {
+            for (int i = 0; i < customerList.Count; i++)
+            {
+                if (id == customerList[i].CustomerID)
+                {
+                    customerList[i] = customername;
+                }
+            }
+            throw new Exception("No Customer by that ID");
+        }
+
+        //Delete Customer by ID
+        public void DeleteCustomerByID(Customer customername, int id)
+        {
+            for (int i = 0; i < customerList.Count; i++)
+            {
+                if (id == customerList[i].CustomerID)
+                {
+                    customerList.RemoveAt(i);
+                }
+            }
+            throw new Exception("No Customer by that ID");
+        }
     }
 }

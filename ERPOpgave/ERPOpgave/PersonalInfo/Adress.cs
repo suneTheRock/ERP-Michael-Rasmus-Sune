@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ERPOpgave.PersonalInfo
 {
-    internal class Adress
+    public class Adress
     {
         public Adress(string city, int number, string street, int zipCode)
         {
@@ -15,14 +15,18 @@ namespace ERPOpgave.PersonalInfo
             Street = street;
             ZipCode = zipCode;
         }
+        public Adress()
+        {
 
-        public string City { get => default; set { } }
+        }
 
-        public int Number { get => default; set { } }
+        public string City { get; set;  }
 
-        public string Street { get => default; set { } }
+        public int Number { get; set; }
 
-        public int ZipCode { get => default; set { } }
+        public string Street { get; set; }
+
+        public int ZipCode { get; set; }
 
         public void ToString()
         {

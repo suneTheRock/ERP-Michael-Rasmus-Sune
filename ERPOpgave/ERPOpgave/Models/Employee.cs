@@ -13,28 +13,10 @@ namespace ERPOpgave.Models
         {
         }
 
-        public int EmplID
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public int EmplID { get => default; set { } }
 
-        public int Hired
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public int Hired { get => default; set { } }
 
-        public int Salary
-        {
-            get => default;
-            set
-            {
-            }
-        }
+        public int Salary { get => default; set { } }
     }
 }
