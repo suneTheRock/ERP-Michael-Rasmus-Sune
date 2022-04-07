@@ -9,11 +9,11 @@ namespace ERPOpgave.Models
 {
     public class Customer : Person
     {
-        
+
         //public Customer(Adress adress, ContactInfo contactInfo, string email, string firstName, string lastName, int phone) : base(adress, contactInfo, email, firstName, lastName, phone)
         //{
         //}
-        //public Customer(int customerid, string email, string firstName, string lastName, int phone) :base(email, firstName, lastName,phone)
+        //public Customer(int customerid, string email, string firstName, string lastName, int phone) : base(email, firstName, lastName, phone)
         //{
         //    this.CustomerID = customerid;
         //    this.Email = email;

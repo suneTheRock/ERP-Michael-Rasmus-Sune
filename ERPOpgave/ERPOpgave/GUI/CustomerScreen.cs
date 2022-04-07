@@ -35,9 +35,6 @@ namespace ERPOpgave.GUI
 			//Call Customer dummies method to create users for Test.
 			//CustomerDummies();
 			
-			
-			
-
 		}
 
 		public void CustomerDummies()
@@ -82,8 +79,21 @@ namespace ERPOpgave.GUI
 				//Screen options 1 and 2, this doesnt work here, we need a proper menu to control this
 				if (info.Key == ConsoleKey.F1)
 				{
-					//CustommerScreen customerScreen = new CustomerScreen();
-					this.EditCustomer();
+					try
+                    {
+						this.EditCustomer();
+					}
+					catch (ArgumentOutOfRangeException ex)
+                    {
+						Console.WriteLine("Kan ikke redigere en kunde, da der er ingen kunde i systemet");
+						Console.ReadLine();
+                        
+						Draw();
+                        
+						
+                    }
+					
+					
 				}
 				if (info.Key == ConsoleKey.F2)
 				{
@@ -114,7 +124,9 @@ namespace ERPOpgave.GUI
 
 		public void EditCustomer()
         {
+			
 			Clear();
+
 			selected = listPage.Select();
 			Clear();
 			//Screen Prompt:

@@ -28,6 +28,11 @@ namespace ERPOpgave.Models
             this.Phone = phone;
         }
 
+        public Person()
+        {
+
+        }
+
         internal PersonalInfo.Adress Adress { get; set; }
 
         internal PersonalInfo.ContactInfo ContactInfo { get; set; }

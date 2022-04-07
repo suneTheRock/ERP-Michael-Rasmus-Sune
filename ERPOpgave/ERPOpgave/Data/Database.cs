@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ERPOpgave.Models;
 using System.Data.SqlClient;
+using System.Configuration;
+using System.Data;
 
 namespace ERPOpgave.Data
 {
@@ -97,5 +99,7 @@ namespace ERPOpgave.Data
             }
             throw new Exception("No Customer by that ID");
         }
+
+        
     }
 }
