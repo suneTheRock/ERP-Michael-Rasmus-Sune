@@ -33,7 +33,9 @@ namespace ERPOpgave.GUI
         {
 			//Call Customer dummies method to create users for Test.
 			//CustomerDummies();
-        }
+			
+
+		}
 
 		public void CustomerDummies()
         {
