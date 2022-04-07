@@ -103,12 +103,16 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("By: "); selected.City = Console.ReadLine();
 			Console.WriteLine("Land: "); selected.Country = Console.ReadLine();			
 			Console.WriteLine("Valuta: "); selected.Currency = Console.ReadLine();
+
+			Draw();
 		}
 		public void DeleteCompany()
 		{
 			Clear(); //Clean
 			listPage.Remove(listPage.Select()); //Choose what Company to remove
 			Clear(); //Clean Again
+
+			Draw();
 		}
 		public void CreateNewCompanyToList()
         {
@@ -128,6 +132,8 @@ namespace ERPOpgave.GUI
 
 			// .Add to create a new company
 			listPage.Add(new Company(name, companyStreet, companyStreetNumber, postNumber, companyCity, companyCountry, companyCurrency));
+
+			Draw();
 		}
 	}
 
