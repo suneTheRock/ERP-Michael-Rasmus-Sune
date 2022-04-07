@@ -103,6 +103,8 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("By: "); selected.City = Console.ReadLine();
 			Console.WriteLine("Land: "); selected.Country = Console.ReadLine();			
 			Console.WriteLine("Valuta: "); selected.Currency = Console.ReadLine();
+
+			Draw();
 		}
 		public void DeleteCompany()
 		{
