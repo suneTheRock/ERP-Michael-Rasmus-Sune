@@ -79,8 +79,9 @@ namespace ERPOpgave.GUI
 				//Screen options 1 and 2, this doesnt work here, we need a proper menu to control this
 				if (info.Key == ConsoleKey.F1)
 				{
+					//den sørger for at den ikke crasher når der er ingen kunde(r) på listen.
 					try
-                    {
+					{
 						this.EditCustomer();
 					}
 					catch (ArgumentOutOfRangeException ex)
@@ -101,8 +102,18 @@ namespace ERPOpgave.GUI
 				}
 				if(info.Key == ConsoleKey.F5)
                 {
-					this.ShowDetailsOfcustomerFromList();
+					//den sørger for at den ikke crasher når der er ingen kunde(r) på listen.
+					try
+					{
+						this.ShowDetailsOfcustomerFromList();
+					}
+					catch (ArgumentOutOfRangeException ex)
+					{
+						Console.WriteLine("Kan ikke vise kundeoplysninger, da der er ingen kunde i systemet");
+						Console.ReadLine();
 
+						Draw();
+					}
 				}
 
 				//tilbage til Hovedmenuen
