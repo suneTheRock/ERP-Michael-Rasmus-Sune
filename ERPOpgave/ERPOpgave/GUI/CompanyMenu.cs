@@ -105,6 +105,7 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("Valuta: "); selected.Currency = Console.ReadLine();
 
 			Draw();
+
 		}
 		public void DeleteCompany()
 		{
