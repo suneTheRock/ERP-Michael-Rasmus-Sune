@@ -95,6 +95,7 @@ namespace ERPOpgave.Data
 
                 
             }
+            
             reader.Close();
 
             return customer;
