@@ -9,8 +9,8 @@ using ERPOpgave.Models;
 Database.Init();
 CustomerScreen titlescreen = new CustomerScreen();
 List<Customer> customers = Database.GetAllCustomers();
-Database.GetCustomerFromID(2);
-titlescreen.listPage.Add(Database.GetCustomerFromID(2));
+Database.GetCustomerByID(2);
+titlescreen.listPage.Add(Database.GetCustomerByID(2));
 Screen.Display(titlescreen);
     
     

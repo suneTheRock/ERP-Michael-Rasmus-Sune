@@ -124,11 +124,11 @@ namespace ERPOpgave.GUI
 					Draw();
                 }
 
-				if(info.Key != ConsoleKey.F)
+				if(info.Key != ConsoleKey.F6)
                 {
 					Clear();
 					Console.WriteLine("Venligst indtast Kundenummer for at finde kunde ");
-					listPage.Add(Database.GetCustomerFromID(Convert.ToInt32(Console.ReadLine())));
+					listPage.Add(Database.GetCustomerByID(Convert.ToInt32(Console.ReadLine())));
 					Draw();
 
 

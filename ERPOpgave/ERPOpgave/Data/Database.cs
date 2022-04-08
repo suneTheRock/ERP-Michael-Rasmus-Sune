@@ -29,7 +29,7 @@ namespace ERPOpgave.Data
             
         }
         //Getting Customer based on ID
-        public static Customer GetCustomerFromID(int i)
+        public static Customer GetCustomerByID(int i)
         {
             Customer customer = null;
             SqlCommand sql = conn.CreateCommand();
@@ -56,11 +56,13 @@ namespace ERPOpgave.Data
                 JOIN[H1PD021122_Gruppe2].[dbo].[ContactInfos]
                 ON Customers.contactInfo_ID = ContactInfos.contactInfoID
 
-
+                
                 WHERE Customers.customerID =" + i;
+                
             SqlDataReader reader = sql.ExecuteReader();
             while (reader.Read())
             {
+                //de objekterne der bliver lavet, sættes til til hver klassens properties.
                 int customId = reader.GetInt32(0);
                 DateTime lastOrder = reader.GetDateTime(1);
                 int personId = reader.GetInt32(2);
@@ -76,6 +78,7 @@ namespace ERPOpgave.Data
                 int contactInfoId = reader.GetInt32(12);
                 int contactInfoValue = reader.GetInt32(13);
 
+                //de objekterne der bliver lavet, sættes til til hver klassens properties.
                 ContactInfo contactInfo = new ContactInfo();
                 contactInfo.ContactInfoID = contactInfoId;
                 contactInfo.Value = contactInfoValue;
@@ -107,6 +110,8 @@ namespace ERPOpgave.Data
         public static List<Customer> GetAllCustomers()
         {
             List<Customer> customers = new List<Customer>();
+
+            //i SQl Scriptet udplukker vi de data vi skal bruge fra tables til at hente fra databasen.
             SqlCommand sql = new SqlCommand
                 (@"SELECT customers.customerID,
                                             customers.lastOrder,
@@ -130,9 +135,11 @@ namespace ERPOpgave.Data
                                             ON Customers.Adress_ID = Adress.adressID
                                             JOIN[H1PD021122_Gruppe2].[dbo].[ContactInfos]
                                             ON Customers.contactInfo_ID = ContactInfos.contactInfoID", conn);
+            //eksekverer sql scriptet
             SqlDataReader reader = sql.ExecuteReader();
             while(reader.Read())
             {
+                //imens scriptet bliver læst fra SQL databasen, bliver der lavet objekter og tilføjes til hver kolonne 
                 int customId = reader.GetInt32(0);
                 DateTime lastOrder = reader.GetDateTime(1);
                 int personId = reader.GetInt32(2);
@@ -148,6 +155,7 @@ namespace ERPOpgave.Data
                 int contactInfoId = reader.GetInt32(12);
                 int contactInfoValue = reader.GetInt32(13);
 
+                //de objekterne der bliver lavet, sættes til til hver klassens properties.
                 ContactInfo contactInfo = new ContactInfo();
                 contactInfo.ContactInfoID = contactInfoId;
                 contactInfo.Value = contactInfoValue;
@@ -157,13 +165,15 @@ namespace ERPOpgave.Data
                 adress.Number = streetNumber;
                 adress.City = city;
                 adress.ZipCode = zipCode;
-
+                //der instatieres customer klassen.
                 Customer customer = new Customer(customId, firstName, lastName, email, phone, adress);
                 customer.LastOrder = lastOrder;
                 customer.ContactInfo = contactInfo;
-                
+                //customer tilføjes til en ny liste vi har lavet i global list i database klassen.
+                //customers liste bliver kaldt i progra,.cs klassen og sættes til listpage.
                 customers.Add(customer);
             }
+            //så bliver der lukket forbindelse til databasen for at gøre det muligt for at læse flere kunder fra databasen. 
             reader.Close();
             return customers;
         }
