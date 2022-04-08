@@ -106,6 +106,7 @@ namespace ERPOpgave.GUI
 					//den sørger for at den ikke crasher når der er ingen kunde(r) på listen.
 					try
 					{
+
 						this.ShowDetailsOfcustomerFromList();
 					}
 					catch (ArgumentOutOfRangeException ex)
@@ -129,7 +130,7 @@ namespace ERPOpgave.GUI
 					Clear();
 					Console.WriteLine("Venligst indtast Kundenummer for at finde kunde ");
 					listPage.Add(Database.GetCustomerByID(Convert.ToInt32(Console.ReadLine())));
-					Draw();
+					
 
 
 				}

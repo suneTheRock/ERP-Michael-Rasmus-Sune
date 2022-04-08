@@ -180,9 +180,104 @@ namespace ERPOpgave.Data
         }
 
         //Insert Customer
-        public static void InsertCustomer(Customer customername)
+        public static void InsertCustomer(Customer customer)
         {
-            customers.Add(customername);
+            StringBuilder builder = new StringBuilder();
+            builder.Append(@"INSERT INTO persons(
+                        Persons.firstName,
+                        Persons.lastName,
+                        Persons.email,
+                        Persons.phone)
+                        values(");
+            
+            builder.AppendFormat("'{0}'", customer.FirstName);
+            builder.AppendFormat("{0}", customer.LastName);
+            builder.AppendFormat("{0}", customer.Email);
+            builder.AppendFormat("{0}", customer.Phone);
+            builder.Append(");");
+
+
+
+            SqlCommand cmd1 = new SqlCommand(@"INSERT INTO persons(
+	                    Persons.firstName,
+	                    Persons.lastName,
+	                    Persons.email,
+	                    Persons.phone)
+	                    values(, '', 'peter@hotmailcom', 23212212);", conn);
+            try
+            {
+                cmd1.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            SqlCommand cmd2 = new SqlCommand(@"INSERT INTO Adress
+	                    (Adress.street,
+	                    Adress.streetNumber,
+	                    Adress.city,
+	                    Adress.zipCode)
+	                    values('nytorvet', 12, 'købehavn', 7322);
+
+                    INSERT INTO ContactInfos
+	                    (ContactInfos.value_)
+	                    values(900);", conn);
+            try
+            {
+                cmd2.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            SqlCommand cmd3 = new SqlCommand(@"INSERT INTO Customers
+                    (customers.lastOrder,
+                    customer.person_ID,
+                    customers.adress_ID,
+                    customers.contactInfo_ID)
+                    values(
+                    '2022-06-04 00:00:00.000',
+                    (SELECT persons.personID FROM Persons where persons.email = 'peter@hotmailcom'),
+                    (SELECT dbo.Adress.adressID FROM dbo.Adress
+
+                        where dbo.Adress.city = 'købehavn' AND
+
+                            Adress.street = 'nytorvet' AND
+
+                            Adress.streetNumber = 12 AND
+
+                            Adress.zipCode = 7322),
+                    (SELECT ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = 900)); ", conn);
+            try
+            {
+                cmd3.ExecuteNonQuery();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine();
+            }
+            finally
+            {
+                conn.Close();   
+            }
+
+
+
+
+
+
+
+
+
+
+
+            cmd1.ExecuteNonQuery();
+
+
+
+            customers.Add(customer);
         }
 
         //Update Customer by ID
