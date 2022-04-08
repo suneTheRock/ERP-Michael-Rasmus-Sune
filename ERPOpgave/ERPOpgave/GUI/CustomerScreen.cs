@@ -124,7 +124,7 @@ namespace ERPOpgave.GUI
 					Draw();
                 }
 
-				if(info.Key != ConsoleKey.F6)
+				if(info.Key == ConsoleKey.F6)
                 {
 					Clear();
 					Console.WriteLine("Venligst indtast Kundenummer for at finde kunde ");
