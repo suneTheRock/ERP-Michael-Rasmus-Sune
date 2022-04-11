@@ -233,6 +233,7 @@ namespace ERPOpgave.GUI
 				
 				Adress adr = new Adress(by,adresseNr,adressen, postnummer);
 				listPage.Add(new Customer(kundeNummer, fornavn, efterNavn, email, tlfNr, adr));
+				Database.InsertCustomer(selected);
 				
 				
 
