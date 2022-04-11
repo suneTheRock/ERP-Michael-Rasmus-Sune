@@ -182,28 +182,19 @@ namespace ERPOpgave.Data
         //Insert Customer
         public static void InsertCustomer(Customer customer)
         {
-            StringBuilder builder = new StringBuilder();
-            builder.Append(@"INSERT INTO persons(
-                        Persons.firstName,
-                        Persons.lastName,
-                        Persons.email,
-                        Persons.phone)
-                        values(");
-            
-            builder.AppendFormat("'{0}'", customer.FirstName);
-            builder.AppendFormat("{0}", customer.LastName);
-            builder.AppendFormat("{0}", customer.Email);
-            builder.AppendFormat("{0}", customer.Phone);
-            builder.Append(");");
-
-
-
-            SqlCommand cmd1 = new SqlCommand(@"INSERT INTO persons(
+            string query1 = @"INSERT INTO persons(
 	                    Persons.firstName,
 	                    Persons.lastName,
 	                    Persons.email,
 	                    Persons.phone)
-	                    values(, '', 'peter@hotmailcom', 23212212);", conn);
+	                    values(@persons.firstName, @persons.lastName, @persons.email, @persons.phone)";
+            
+            SqlCommand cmd1 = new SqlCommand(query1, conn);
+
+            cmd1.Parameters.AddWithValue("@persons.firstName", customer.FirstName);
+            cmd1.Parameters.AddWithValue("@persons.lastName", customer.LastName);
+            cmd1.Parameters.AddWithValue("@persons.email", customer.Email);
+            cmd1.Parameters.AddWithValue("@persons.phone", customer.Phone);
             try
             {
                 cmd1.ExecuteNonQuery();
@@ -213,16 +204,19 @@ namespace ERPOpgave.Data
                 Console.WriteLine(ex.Message);
             }
 
-            SqlCommand cmd2 = new SqlCommand(@"INSERT INTO Adress
+            string query2 = @"INSERT INTO Adress
 	                    (Adress.street,
 	                    Adress.streetNumber,
 	                    Adress.city,
 	                    Adress.zipCode)
-	                    values('nytorvet', 12, 'købehavn', 7322);
+	                    values(@Adress.street, @Adress.streetNumber, @Adress.city, @Adress.zipCode)";
 
-                    INSERT INTO ContactInfos
-	                    (ContactInfos.value_)
-	                    values(900);", conn);
+            SqlCommand cmd2 = new SqlCommand(query2, conn);
+
+            cmd2.Parameters.AddWithValue("@Adress.street", customer.Adress.Street);
+            cmd2.Parameters.AddWithValue("@Adress.streetNumber", customer.Adress.Number);
+            cmd2.Parameters.AddWithValue("@Adress.city", customer.Adress.City);
+            cmd2.Parameters.AddWithValue("@Adress.zipCode", customer.Adress.ZipCode);
             try
             {
                 cmd2.ExecuteNonQuery();
@@ -232,7 +226,7 @@ namespace ERPOpgave.Data
                 Console.WriteLine(ex.Message);
             }
 
-            SqlCommand cmd3 = new SqlCommand(@"INSERT INTO Customers
+            string query3 = @"INSERT INTO Customers
                     (customers.lastOrder,
                     customer.person_ID,
                     customers.adress_ID,
@@ -249,7 +243,14 @@ namespace ERPOpgave.Data
                             Adress.streetNumber = 12 AND
 
                             Adress.zipCode = 7322),
-                    (SELECT ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = 900)); ", conn);
+                    (SELECT ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = 900))";
+
+            SqlCommand cmd3 = new SqlCommand(query3, conn);
+
+            cmd3.Parameters.AddWithValue("@customers.lastOrder", customer.LastOrder);
+            cmd3.Parameters.AddWithValue("@customers.@SELECT persons.personID FROM Persons where persons.email =", customer.Email);
+            cmd3.Parameters.AddWithValue("@SELECT dbo.Adress.adressID FROM dbo.Adress where dbo.Adress.city =",customer.Adress.City);
+            
             try
             {
                 cmd3.ExecuteNonQuery();
@@ -262,20 +263,6 @@ namespace ERPOpgave.Data
             {
                 conn.Close();   
             }
-
-
-
-
-
-
-
-
-
-
-
-            cmd1.ExecuteNonQuery();
-
-
 
             customers.Add(customer);
         }
