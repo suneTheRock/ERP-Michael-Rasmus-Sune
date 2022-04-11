@@ -69,7 +69,7 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("Tryk på F1 for at redigere en kunde");
 			Console.WriteLine("Tryk på F2 for at oprette en kunde");
 			Console.WriteLine("Tryk på F5 for at kunde detalje");
-			Console.WriteLine("Tryk på F for at finde kunde via kundenummer");
+			Console.WriteLine("Tryk på F6 for at finde kunde via kundenummer");
 			//CustomerScreen customerScreen = new CustomerScreen();
 
 			bool loop = true;
@@ -129,7 +129,14 @@ namespace ERPOpgave.GUI
                 {
 					Clear();
 					Console.WriteLine("Venligst indtast Kundenummer for at finde kunde ");
-					listPage.Add(Database.GetCustomerByID(Convert.ToInt32(Console.ReadLine())));
+					var inputed = Convert.ToInt32(Console.ReadLine);
+					listPage.Add(Database.GetCustomerByID(inputed));
+					if(selected.CustomerID == inputed)
+                    {
+						ShowDetailsOfcustomerFromList();
+                    }
+					
+
 					
 
 
@@ -226,6 +233,7 @@ namespace ERPOpgave.GUI
 				
 				Adress adr = new Adress(by,adresseNr,adressen, postnummer);
 				listPage.Add(new Customer(kundeNummer, fornavn, efterNavn, email, tlfNr, adr));
+				
 				
 
 			}
