@@ -16,6 +16,7 @@ namespace ERPOpgave.Data
     {
         static List<Customer> customers = new List<Customer>();
         //private static Database Instance { get; set; }
+        static Person person = new Person();
         static SqlConnection conn = null;
         public static void Init() 
         {
@@ -191,10 +192,10 @@ namespace ERPOpgave.Data
             
             SqlCommand cmd1 = new SqlCommand(query1, conn);
 
-            cmd1.Parameters.AddWithValue("@persons.firstName", customer.FirstName);
-            cmd1.Parameters.AddWithValue("@persons.lastName", customer.LastName);
-            cmd1.Parameters.AddWithValue("@persons.email", customer.Email);
-            cmd1.Parameters.AddWithValue("@persons.phone", customer.Phone);
+            cmd1.Parameters.AddWithValue("@persons.firstName", person.FirstName);
+            cmd1.Parameters.AddWithValue("@persons.lastName", person.LastName);
+            cmd1.Parameters.AddWithValue("@persons.email", person.Email);
+            cmd1.Parameters.AddWithValue("@persons.phone", person.Phone);
             try
             {
                 cmd1.ExecuteNonQuery();
