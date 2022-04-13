@@ -212,6 +212,7 @@ namespace ERPOpgave.GUI
 
 		public void AddCustomerToList()
 		{
+			
 			Clear();
 
 			try
@@ -232,8 +233,9 @@ namespace ERPOpgave.GUI
 
 				
 				Adress adr = new Adress(by,adresseNr,adressen, postnummer);
-				//listPage.Add(new Customer(fornavn, efterNavn, email, tlfNr, adr));
-				Database.InsertCustomer(new Customer(fornavn, efterNavn, email, tlfNr, adr));
+				Customer cs = new Customer(fornavn, efterNavn, email, tlfNr, adr);
+				listPage.Add(cs);
+				Database.InsertCustomer(cs);
 				
 				
 				
