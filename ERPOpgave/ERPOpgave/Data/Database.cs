@@ -24,6 +24,7 @@ namespace ERPOpgave.Data
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
             builder.DataSource = "docker.data.techcollege.dk";
             builder.UserID = "H1PD021122_Gruppe2";
+            builder.InitialCatalog = "H1PD021122_Gruppe2";
             builder.Password = "H1PD021122_Gruppe2";
             conn = new SqlConnection(builder.ConnectionString);
             conn.Open();
@@ -80,7 +81,7 @@ namespace ERPOpgave.Data
                 int contactInfoValue = reader.GetInt32(13);
 
                 //de objekterne der bliver lavet, sættes til til hver klassens properties.
-                ContactInfo contactInfo = new ContactInfo();
+                ContactInfo contactInfo = new ContactInfo(contactInfoValue);
                 contactInfo.ContactInfoID = contactInfoId;
                 contactInfo.Value = contactInfoValue;
 
@@ -90,7 +91,7 @@ namespace ERPOpgave.Data
                 adress.City = city;
                 adress.ZipCode = zipCode;
 
-                customer = new Customer(firstName, lastName, email, phone, adress);
+                customer = new Customer(firstName, lastName, email, phone, adress,contactInfo);
                 customer.CustomerID = customId;
                 customer.LastOrder = lastOrder;
                 customer.ContactInfo = contactInfo;
@@ -159,7 +160,7 @@ namespace ERPOpgave.Data
                 int contactInfoValue = reader.GetInt32(13);
 
                 //de objekterne der bliver lavet, sættes til til hver klassens properties.
-                ContactInfo contactInfo = new ContactInfo();
+                ContactInfo contactInfo = new ContactInfo(contactInfoValue);
                 contactInfo.ContactInfoID = contactInfoId;
                 contactInfo.Value = contactInfoValue;
                 
@@ -169,7 +170,7 @@ namespace ERPOpgave.Data
                 adress.City = city;
                 adress.ZipCode = zipCode;
                 //der instatieres customer klassen.
-                Customer customer = new Customer(firstName, lastName, email, phone, adress);
+                Customer customer = new Customer(firstName, lastName, email, phone, adress, contactInfo);
                 customer.CustomerID = customId;
                 customer.LastOrder = lastOrder;
                 customer.ContactInfo = contactInfo;
@@ -185,19 +186,19 @@ namespace ERPOpgave.Data
         //Insert Customer
         public static void InsertCustomer(Customer customer)
         {
-            string query1 = @"INSERT INTO persons(
-	                    Persons.firstName,
-	                    Persons.lastName,
-	                    Persons.email,
-	                    Persons.phone)
-	                    values(@persons.firstName, @persons.lastName, @persons.email, @persons.phone)";
+            string query1 = @"INSERT INTO Persons(
+	                    firstName,
+	                    lastName,
+	                    email,
+	                    phone)
+	                    values(@firstName, @lastName, @email, @phone)";
             
             SqlCommand cmd1 = new SqlCommand(query1, conn);
 
-            cmd1.Parameters.AddWithValue("@persons.firstName", person.FirstName);
-            cmd1.Parameters.AddWithValue("@persons.lastName", person.LastName);
-            cmd1.Parameters.AddWithValue("@persons.email", person.Email);
-            cmd1.Parameters.AddWithValue("@persons.phone", person.Phone);
+            cmd1.Parameters.AddWithValue("@firstName", customer.FirstName);
+            cmd1.Parameters.AddWithValue("@lastName", customer.LastName);
+            cmd1.Parameters.AddWithValue("@email", customer.Email);
+            cmd1.Parameters.AddWithValue("@phone", customer.Phone);
             try
             {
                 
@@ -210,18 +211,18 @@ namespace ERPOpgave.Data
             }
 
             string query2 = @"INSERT INTO Adress
-	                    (Adress.street,
-	                    Adress.streetNumber,
-	                    Adress.city,
-	                    Adress.zipCode)
-	                    values(@Adress.street, @Adress.streetNumber, @Adress.city, @Adress.zipCode)";
+	                    (street,
+	                    streetNumber,
+	                    city,
+	                    zipCode)
+	                    values(@street, @streetNumber, @city, @zipCode)";
 
             SqlCommand cmd2 = new SqlCommand(query2, conn);
 
-            cmd2.Parameters.AddWithValue("@Adress.street", customer.Adress.Street);
-            cmd2.Parameters.AddWithValue("@Adress.streetNumber", customer.Adress.Number);
-            cmd2.Parameters.AddWithValue("@Adress.city", customer.Adress.City);
-            cmd2.Parameters.AddWithValue("@Adress.zipCode", customer.Adress.ZipCode);
+            cmd2.Parameters.AddWithValue("@street", customer.Adress.Street);
+            cmd2.Parameters.AddWithValue("@streetNumber", customer.Adress.Number);
+            cmd2.Parameters.AddWithValue("@city", customer.Adress.City);
+            cmd2.Parameters.AddWithValue("@zipCode", customer.Adress.ZipCode);
             try
             {
                 cmd2.ExecuteNonQuery();
@@ -233,34 +234,40 @@ namespace ERPOpgave.Data
             }
 
             string query3 = @"INSERT INTO Customers
-                    (customers.lastOrder,
-                    customer.person_ID,
-                    customers.adress_ID,
-                    customers.contactInfo_ID)
+                    (lastOrder,
+                    person_ID,
+                    adress_ID,
+                    contactInfo_ID)
                     values(
                     '2022-06-04 00:00:00.000',
-                    (SELECT persons.personID FROM Persons where persons.email = '@person.email'),
+                    (SELECT persons.personID FROM Persons where persons.email = '@email'),
                     (SELECT dbo.Adress.adressID FROM dbo.Adress
 
-                        where dbo.Adress.city = '@adress.city' AND
+                        where dbo.Adress.city = '@city' AND
 
-                            Adress.street = '@adress.street' AND
+                            Adress.street = '@street' AND
 
-                            Adress.streetNumber = '@adress.streetNumber' AND
+                            Adress.streetNumber = '@streetNumber' AND
 
-                            Adress.zipCode = @adress.zipCode);
-                    //(SELECT ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = 900))";
+                            zipCode = @zipCode);
+                    (SELECT ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = @value ))";
 
             SqlCommand cmd3 = new SqlCommand(query3, conn);
 
+            cmd3.Parameters.AddWithValue("@street", customer.Adress.Street);
+            cmd3.Parameters.AddWithValue("@streetNumber", customer.Adress.Number);
+            cmd3.Parameters.AddWithValue("@city", customer.Adress.City);
+            cmd3.Parameters.AddWithValue("@zipCode", customer.Adress.ZipCode);
+            string time = "null";
+            if (customer.LastOrder > DateTime.MinValue)
+            {
+                time = customer.LastOrder.ToString();
+            }
+
             cmd3.Parameters.AddWithValue("@customers.customerID", customer.CustomerID);
-            cmd3.Parameters.AddWithValue("@customers.lastOrder", customer.LastOrder);
-            cmd3.Parameters.AddWithValue("@SELECT persons.personID FROM Persons where persons.email", customer.Email);
-            cmd3.Parameters.AddWithValue("@SELECT dbo.Adress.adressID FROM dbo.Adress where dbo.Adress.city", customer.Adress.City);
-            cmd3.Parameters.AddWithValue("@SELECT dbo.Adress.addressID FROM dbo.Adress where dbo.Adress.street",customer.Adress.Street);
-            cmd3.Parameters.AddWithValue("@SELECT dbo.Adress.adressID FROM dbo.Adress where dbo.Adress.streetNumber",customer.Adress.Number);
-            cmd3.Parameters.AddWithValue("@SELECT dbo.Adress.adressID FROM dbo.Adress where dbo.Adress.zipCode", customer.Adress.ZipCode);
-            //cmd3.Parameters.AddWithValue("@customer.email", customer.Email);
+            cmd3.Parameters.AddWithValue("@customers.lastOrder", time);
+            cmd3.Parameters.AddWithValue("@value", customer.ContactInfo.Value);
+            cmd3.Parameters.AddWithValue("@email", customer.Email);
 
 
             try

@@ -230,10 +230,12 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("Adresse nr: "); var adresseNr = Convert.ToInt32(Console.ReadLine());
 				Console.WriteLine("By: "); var by = Console.ReadLine();
 				Console.WriteLine("Postnummer: "); var postnummer = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("værdien : "); var value = Convert.ToInt32(Console.ReadLine());
 
-				
+
 				Adress adr = new Adress(by,adresseNr,adressen, postnummer);
-				Customer cs = new Customer(fornavn, efterNavn, email, tlfNr, adr);
+				ContactInfo contactInfo = new ContactInfo(value);
+				Customer cs = new Customer(fornavn, efterNavn, email, tlfNr, adr, contactInfo);
 				listPage.Add(cs);
 				Database.InsertCustomer(cs);
 				

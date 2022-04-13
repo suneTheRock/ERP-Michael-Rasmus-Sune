@@ -10,7 +10,7 @@ Database.Init();
 Customer customer;
 CustomerScreen titlescreen = new CustomerScreen();
 List<Customer> customers = Database.GetAllCustomers();
-Database.GetCustomerByID(2);
+//Database.GetCustomerByID(2);
 titlescreen.listPage.Add(Database.GetAllCustomers());
 
 Screen.Display(titlescreen);

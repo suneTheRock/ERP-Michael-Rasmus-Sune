@@ -11,5 +11,12 @@ namespace ERPOpgave.PersonalInfo
         public int ContactInfoID { get => default; set { } }
 
         public int Value { get => default; set { } }
+
+        public ContactInfo(int value)
+        {
+            Value = value;  
+        }
     }
+
+    
 }
