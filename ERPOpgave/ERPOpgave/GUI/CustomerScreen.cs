@@ -220,7 +220,7 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("-----------------------------");
 				Console.WriteLine("Indtast Venligst kundens oplysninger");
 				//Run through each variable needed to create a new Customer
-				Console.WriteLine("Kundenummer: "); var kundeNummer = Convert.ToInt32(Console.ReadLine());
+				//Console.WriteLine("Kundenummer: "); var kundeNummer = Convert.ToInt32(Console.ReadLine());
 				Console.WriteLine("Kundens fornavn: "); var fornavn = Console.ReadLine();
 				Console.WriteLine("Kundens efternavn: "); var efterNavn = Console.ReadLine();
 				Console.WriteLine("Email: "); var email = Console.ReadLine();
@@ -232,8 +232,9 @@ namespace ERPOpgave.GUI
 
 				
 				Adress adr = new Adress(by,adresseNr,adressen, postnummer);
-				listPage.Add(new Customer(kundeNummer, fornavn, efterNavn, email, tlfNr, adr));
-				Database.InsertCustomer(selected);
+				//listPage.Add(new Customer(fornavn, efterNavn, email, tlfNr, adr));
+				Database.InsertCustomer(new Customer(fornavn, efterNavn, email, tlfNr, adr));
+				
 				
 				
 

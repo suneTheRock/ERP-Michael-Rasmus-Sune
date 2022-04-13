@@ -24,9 +24,9 @@ namespace ERPOpgave.Models
 
         //}
         
-        public Customer(int customerId, string firstName, string lastName, string email, int phone, Adress adress) :base(email, firstName, lastName, phone)
+        public Customer( string firstName, string lastName, string email, int phone, Adress adress) :base(email, firstName, lastName, phone)
         {
-            this.CustomerID=customerId;
+            
             this.FullName = $"{firstName} {lastName}";
             this.Adress = adress;
             this.Phone = phone;

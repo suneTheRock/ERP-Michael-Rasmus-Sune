@@ -90,7 +90,8 @@ namespace ERPOpgave.Data
                 adress.City = city;
                 adress.ZipCode = zipCode;
 
-                customer = new Customer(customId, firstName, lastName, email, phone, adress);
+                customer = new Customer(firstName, lastName, email, phone, adress);
+                customer.CustomerID = customId;
                 customer.LastOrder = lastOrder;
                 customer.ContactInfo = contactInfo;
 
@@ -168,7 +169,8 @@ namespace ERPOpgave.Data
                 adress.City = city;
                 adress.ZipCode = zipCode;
                 //der instatieres customer klassen.
-                Customer customer = new Customer(customId, firstName, lastName, email, phone, adress);
+                Customer customer = new Customer(firstName, lastName, email, phone, adress);
+                customer.CustomerID = customId;
                 customer.LastOrder = lastOrder;
                 customer.ContactInfo = contactInfo;
                 //customer tilføjes til en ny liste vi har lavet i global list i database klassen.
@@ -198,7 +200,9 @@ namespace ERPOpgave.Data
             cmd1.Parameters.AddWithValue("@persons.phone", person.Phone);
             try
             {
+                
                 cmd1.ExecuteNonQuery();
+
             }
             catch (Exception ex)
             {
@@ -221,6 +225,7 @@ namespace ERPOpgave.Data
             try
             {
                 cmd2.ExecuteNonQuery();
+                
             }
             catch (Exception ex)
             {
@@ -234,26 +239,32 @@ namespace ERPOpgave.Data
                     customers.contactInfo_ID)
                     values(
                     '2022-06-04 00:00:00.000',
-                    (SELECT persons.personID FROM Persons where persons.email = 'peter@hotmailcom'),
+                    (SELECT persons.personID FROM Persons where persons.email = '@person.email'),
                     (SELECT dbo.Adress.adressID FROM dbo.Adress
 
-                        where dbo.Adress.city = 'købehavn' AND
+                        where dbo.Adress.city = '@adress.city' AND
 
-                            Adress.street = 'nytorvet' AND
+                            Adress.street = '@adress.street' AND
 
-                            Adress.streetNumber = 12 AND
+                            Adress.streetNumber = '@adress.streetNumber' AND
 
-                            Adress.zipCode = 7322),
-                    (SELECT ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = 900))";
+                            Adress.zipCode = @adress.zipCode);
+                    //(SELECT ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = 900))";
 
             SqlCommand cmd3 = new SqlCommand(query3, conn);
 
+            cmd3.Parameters.AddWithValue("@customers.customerID", customer.CustomerID);
             cmd3.Parameters.AddWithValue("@customers.lastOrder", customer.LastOrder);
-            cmd3.Parameters.AddWithValue("@customers.@SELECT persons.personID FROM Persons where persons.email =", customer.Email);
-            cmd3.Parameters.AddWithValue("@SELECT dbo.Adress.adressID FROM dbo.Adress where dbo.Adress.city =",customer.Adress.City);
-            
+            cmd3.Parameters.AddWithValue("@SELECT persons.personID FROM Persons where persons.email", customer.Email);
+            cmd3.Parameters.AddWithValue("@SELECT dbo.Adress.adressID FROM dbo.Adress where dbo.Adress.city", customer.Adress.City);
+            cmd3.Parameters.AddWithValue("@SELECT dbo.Adress.addressID FROM dbo.Adress where dbo.Adress.street",customer.Adress.Street);
+            cmd3.Parameters.AddWithValue("@SELECT dbo.Adress.adressID FROM dbo.Adress where dbo.Adress.streetNumber",customer.Adress.Number);
+            cmd3.Parameters.AddWithValue("@SELECT dbo.Adress.adressID FROM dbo.Adress where dbo.Adress.zipCode", customer.Adress.ZipCode);
+            //cmd3.Parameters.AddWithValue("@customer.email", customer.Email);
+
+
             try
-            {
+            {   
                 cmd3.ExecuteNonQuery();
             }
             catch(Exception ex)
