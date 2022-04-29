@@ -58,6 +58,7 @@ namespace ERPOpgave.Data
                 JOIN[H1PD021122_Gruppe2].[dbo].[ContactInfos]
                 ON Customers.contactInfo_ID = ContactInfos.contactInfoID
 
+
                 
                 WHERE Customers.customerID =" + i;
                 
