@@ -24,7 +24,10 @@ namespace ERPOpgave.GUI
 		public string SalesPrice { get; set; } = "Salgspris";
 
 		public string Stock { get; set; } = "På lager";
-		public string UnitType { get; set; } = "Enhedstype";
+		public string Unittype { get; set; } = "unittype";
+
+		public string Location { get; set; } = "Location";
+		public string ProfitMargin { get; set; } = "Profit Margin";
 
 
 
@@ -40,7 +43,6 @@ namespace ERPOpgave.GUI
 			listPage.Add(new Product(1, "Skrue", "Dette er en skrue", 20, 80, "1222", 200, Product.UnitType.Pieces));
 			listPage.Add(new Product(2, "Bor", "Dette er et bor", 19, 90, "1233", 180, Product.UnitType.Hours));
 			listPage.Add(new Product(3, "Bord", "Dette er et bord", 2, 120, "1256", 500, Product.UnitType.Meters));
-			//listPage.Add(new Product(1, "sune", "bech", "sune401@hotmail.dk", 23123321, "forsend", 999, 200, "svvcc"));
 		}
 		protected override void Draw()
 		{
@@ -51,16 +53,20 @@ namespace ERPOpgave.GUI
 
 
 			//We add a Column with (<A title taken from above> , <"The Variablename we gave them in their own class">)
-			listPage.AddColumn(ProductNumber, "Produkt ID");
-			listPage.AddColumn(Name, "Navn");
-			listPage.AddColumn(Description, "Beskrivelse");
-			listPage.AddColumn(CostPrice, "Købspris");
-			listPage.AddColumn(SalesPrice, "Salgspris");
+			listPage.AddColumn(ProductNumber, "ProductId");
+            listPage.AddColumn(Name, "Name");
+            //listPage.AddColumn(Description, "Description");
+            listPage.AddColumn(CostPrice, "Costprice");
+            listPage.AddColumn(SalesPrice, "Salesprice");
+			//listPage.AddColumn(Location,"Location");
+			listPage.AddColumn(Stock, "Stock");
+			//listPage.AddColumn(Unittype, "Unittype");
+			listPage.AddColumn(ProfitMargin, "tempBeans");
 
 			//Draw to see this printed out
 			listPage.Draw();
 
-			//Screen Prompt for our viewers to decide which of the two
+			//Screen Prompt for our viewers to decide which of the three
 			Console.WriteLine("Tryk på F1 for at redigere en kunde");
 			Console.WriteLine("Tryk på F2 for at oprette en kunde");
 			Console.WriteLine("Tryk på F5 for at kunde detalje");
@@ -73,7 +79,6 @@ namespace ERPOpgave.GUI
 				//Screen options 1 and 2, this doesnt work here, we need a proper menu to control this
 				if (info.Key == ConsoleKey.F1)
 				{
-					//CustommerScreen productScreen = new ProductScreen();
 					this.EditProduct();
 				}
 				if (info.Key == ConsoleKey.F2)
@@ -96,30 +101,34 @@ namespace ERPOpgave.GUI
 			}
 
 		}
-
+		 
 		public void EditProduct()
 		{
+			Product.UnitType tempUnitType = 0;
+
 			Clear();
 			selected = listPage.Select();
 			Clear();
 			//Screen Prompt:
-			Console.WriteLine("Redigering af kundens oplysninger:");
+			Console.WriteLine("Redigering af produktets oplysninger:");
 			Console.WriteLine("-----------------------------");
-			Console.WriteLine("Indtast Venligst kundens oplysninger");
+			Console.WriteLine("Indtast Venligst produktets oplysninger");
 
 			try
 			{
-				Console.WriteLine("Produkt ID: "); selected.ItemNumber = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("Product navn: "); selected.Name = Console.ReadLine();
-				Console.WriteLine("Produkt beskrivelse: "); selected.Description = Console.ReadLine();
-				Console.WriteLine("Købspris: "); selected.Costprice =Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("Salgspris: "); selected.Salesprice = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("Lokation: "); selected.Location = Console.ReadLine();
-				Console.WriteLine("På lager: "); selected.Stock = Convert.ToInt32(Console.ReadLine());
-				//Console.WriteLine("Enhedstype : "); selected.Unittype = (Console.ReadLine());
+                Console.WriteLine("Produkt ID: "); selected.ItemNumber = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Product navn: "); selected.Name = Console.ReadLine();
+                Console.WriteLine("Produkt beskrivelse: "); selected.Description = Console.ReadLine();
+                Console.WriteLine("Købspris: "); selected.Costprice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Salgspris: "); selected.Salesprice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Lokation: "); selected.Location = Console.ReadLine();
+                Console.WriteLine("På lager: "); selected.Stock = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enhedstype : "); Enum.TryParse(Console.ReadLine(), out tempUnitType);
+                 selected.Unittype = tempUnitType; 
+					
 
 
-			}
+            }
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
@@ -127,10 +136,8 @@ namespace ERPOpgave.GUI
 
 			Draw();
 
-			//Run through each thing that needs to be edited in the employee
+			//Run through each thing that needs to be edited in the product
 
-			//listPage.
-			//This isn't going to work, I need to figure out how to target the selected company for its own edit.
 
 		}
 
@@ -139,41 +146,43 @@ namespace ERPOpgave.GUI
             Clear();
             selected = listPage.Select();
             Clear();
-            Console.WriteLine("Kundens Detalje ");
+            Console.WriteLine("Produktets detaljer");
             Console.WriteLine("																				Tryk Esc + Enter for at gå tilbage til Menuen");
             Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("Navn: " + selected.FirstName);
-            Console.WriteLine("Efternavn: " + selected.LastName);
-            Console.WriteLine("Adresse: " + selected.Adress.Street);
-            Console.WriteLine("Husnummer: " + selected.Adress.Number);
-            Console.WriteLine("Postnummer: " + selected.Adress.ZipCode);
-            Console.WriteLine("By: " + selected.Adress.City);
-            Console.WriteLine("Telefonnummer: " + selected.Phone);
-            Console.WriteLine("Email: " + selected.Email);
+            Console.WriteLine("Produkt ID: " + selected.ProductId);
+            Console.WriteLine("Navn: " + selected.Name);
+            Console.WriteLine("Beskrivelse: " + selected.Description);
+            Console.WriteLine("Købspris: " + selected.Costprice);
+            Console.WriteLine("Salgspris: " + selected.Salesprice);
+            Console.WriteLine("Lokation: " + selected.Location);
+            Console.WriteLine("På lager: " + selected.Stock);
+            Console.WriteLine("Enhedstype: " + selected.Unittype);
+
+			Draw();
         }
 
 		public void AddProductToList()
 		{
+
 			Clear();
 
 			try
 			{
-				Console.WriteLine("Opsætning af nye kundeoplysning");
+				Console.WriteLine("Opsætning af nye produkt oplysninger");
 				Console.WriteLine("-----------------------------");
-				Console.WriteLine("Indtast Venligst kundens oplysninger");
+				Console.WriteLine("Indtast venligst produktets oplysninger");
 				//Run through each variable needed to create a new Product
-				Console.WriteLine("Kundenummer: "); var kundeNummer = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("Kundens fornavn: "); var fornavn = Console.ReadLine();
-				Console.WriteLine("Kundens efternavn: "); var efterNavn = Console.ReadLine();
-				Console.WriteLine("Email: "); var email = Console.ReadLine();
-				Console.WriteLine("Tlf nr: "); var tlfNr = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("Adresse: "); var adressen = Console.ReadLine();
-				Console.WriteLine("Adresse nr: "); var adresseNr = Convert.ToInt32(Console.ReadLine());
-				Console.WriteLine("By: "); var by = Console.ReadLine();
-				Console.WriteLine("Postnummer: "); var postnummer = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("ProduktID: "); var produktID = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Navn: "); var navn = Console.ReadLine();
+				Console.WriteLine("Beskrivelse: "); var beskrivelse = Console.ReadLine();
+				Console.WriteLine("købspris: "); var købspris = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Salgspris: "); var salgspris = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Lokation: "); var lokation = (Console.ReadLine());
+				Console.WriteLine("På lager: "); var lager = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Enhedstype: "); Enum.TryParse<Product.UnitType>(Console.ReadLine(), ignoreCase: true, out var enhedsType);
 
-				Adress adr = new Adress(by, adresseNr, adressen, postnummer);
-				listPage.Add(new Product(kundeNummer, fornavn, efterNavn, email, tlfNr, adr));
+
+				listPage.Add(new Product(produktID,navn,beskrivelse,købspris,salgspris,lokation,lager,enhedsType));
 
 
 			}
@@ -181,14 +190,6 @@ namespace ERPOpgave.GUI
 			{
 				Console.WriteLine(ex.Message);
 			}
-
-			//Screen Prompt:
-
-			// .Add to create a new company
-			//listPage.Add(new Product(adresse, kontaktInfo, email, fornavn, efterNavn, tlfNr, by, postnummer, kontaktInfo, valuta));
-			//listPage.Add(new Product(name, companyStreet, companyStreetNumber, postNumber, companyCity, companyCountry, companyCurrency));
-
-			// tilbage til listen
 			Draw();
 
 		}
