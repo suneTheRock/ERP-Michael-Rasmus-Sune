@@ -129,9 +129,9 @@ namespace ERPOpgave.GUI
                 {
 					Clear();
 					Console.WriteLine("Venligst indtast Kundenummer for at finde kunde ");
-					var inputed = Convert.ToInt32(Console.ReadLine);
-					listPage.Add(Database.GetCustomerByID(inputed));
-					if(selected.CustomerID == inputed)
+					var input = Console.ReadLine();
+					listPage.Add(Database.GetCustomerByID(Convert.ToInt32(input)));
+					//if(selected.CustomerID == input)
                     {
 						ShowDetailsOfcustomerFromList();
                     }
