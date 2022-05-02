@@ -24,7 +24,7 @@ namespace ERPOpgave.Models
 
         //}
         
-        public Customer( string firstName, string lastName, string email, int phone, Adress adress, ContactInfo contactInfo) :base(email, firstName, lastName, phone)
+        public Customer( string firstName, string lastName, string email, string phone, Adress adress, ContactInfo contactInfo) :base(email, firstName, lastName, phone)
         {
             
             this.FullName = $"{firstName} {lastName}";

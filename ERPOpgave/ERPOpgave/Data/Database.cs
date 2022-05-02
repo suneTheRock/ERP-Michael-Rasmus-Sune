@@ -72,7 +72,7 @@ namespace ERPOpgave.Data
                 string firstName = reader.GetString(3);
                 string lastName = reader.GetString(4);
                 string email = reader.GetString(5);
-                int phone = reader.GetInt32(6);
+                string phone = reader.GetString(6);
                 int adressId = reader.GetInt32(7);
                 string street = reader.GetString(8);
                 int streetNumber = reader.GetInt32(9);
@@ -151,7 +151,7 @@ namespace ERPOpgave.Data
                 string firstName = reader.GetString(3);
                 string lastName = reader.GetString(4);
                 string email = reader.GetString(5);
-                int phone = reader.GetInt32(6);
+                string phone = reader.GetString(6);
                 int adressId = reader.GetInt32(7);
                 string street = reader.GetString(8);
                 int streetNumber = reader.GetInt32(9);
@@ -234,46 +234,60 @@ namespace ERPOpgave.Data
                 Console.WriteLine(ex.Message);
             }
 
-            string query3 = @"INSERT INTO Customers
+            string query3 = @"INSERT INTO ContactInfos
+                    (value_)
+                    values(@value)";
+            SqlCommand cmd3 = new SqlCommand(query3, conn);
+            cmd3.Parameters.AddWithValue("@value", customer.ContactInfo.Value);
+            try
+            {
+                cmd3.ExecuteNonQuery();
+            }
+            catch(Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+
+
+            string query4 = @"INSERT INTO Customers
                     (lastOrder,
                     person_ID,
                     adress_ID,
                     contactInfo_ID)
                     values(
                     '2022-06-04 00:00:00.000',
-                    (SELECT persons.personID FROM Persons where persons.email = '@email'),
+                    (SELECT persons.personID FROM Persons where persons.email = @email),
                     (SELECT dbo.Adress.adressID FROM dbo.Adress
 
-                        where dbo.Adress.city = '@city' AND
+                        where dbo.Adress.city = @city AND
 
-                            Adress.street = '@street' AND
+                            Adress.street = @street AND
 
-                            Adress.streetNumber = '@streetNumber' AND
+                            Adress.streetNumber = @streetNumber AND
 
-                            zipCode = @zipCode);
-                    (SELECT ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = @value ))";
+                            zipCode = @zipCode),
+                    (SELECT ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = @value)";
 
-            SqlCommand cmd3 = new SqlCommand(query3, conn);
+            SqlCommand cmd4 = new SqlCommand(query4, conn);
 
-            cmd3.Parameters.AddWithValue("@street", customer.Adress.Street);
-            cmd3.Parameters.AddWithValue("@streetNumber", customer.Adress.Number);
-            cmd3.Parameters.AddWithValue("@city", customer.Adress.City);
-            cmd3.Parameters.AddWithValue("@zipCode", customer.Adress.ZipCode);
+            cmd4.Parameters.AddWithValue("@street", customer.Adress.Street);
+            cmd4.Parameters.AddWithValue("@streetNumber", customer.Adress.Number);
+            cmd4.Parameters.AddWithValue("@city", customer.Adress.City);
+            cmd4.Parameters.AddWithValue("@zipCode", customer.Adress.ZipCode);
+            cmd4.Parameters.AddWithValue("@value", customer.ContactInfo.Value);
             string time = "null";
             if (customer.LastOrder > DateTime.MinValue)
             {
                 time = customer.LastOrder.ToString();
             }
 
-            cmd3.Parameters.AddWithValue("@customers.customerID", customer.CustomerID);
-            cmd3.Parameters.AddWithValue("@customers.lastOrder", time);
-            cmd3.Parameters.AddWithValue("@value", customer.ContactInfo.Value);
+            //cmd3.Parameters.AddWithValue("@customers.customerID", customer.CustomerID);
             cmd3.Parameters.AddWithValue("@email", customer.Email);
 
 
             try
             {   
-                cmd3.ExecuteNonQuery();
+                cmd4.ExecuteNonQuery();
             }
             catch(Exception ex)
             {

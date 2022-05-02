@@ -170,7 +170,7 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("Kundens fornavn: "); selected.FirstName = Console.ReadLine();
 				Console.WriteLine("Kundens efternavn: "); selected.LastName = Console.ReadLine();
 				Console.WriteLine("Email "); selected.Email = Console.ReadLine();
-				Console.WriteLine("Tlf nr: "); selected.Phone = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Tlf nr: "); selected.Phone = Convert.ToString(Console.ReadLine());
 				Console.WriteLine("Adresse: "); selected.Adress.Street = Console.ReadLine();
 				Console.WriteLine("adresse nr: "); selected.Adress.Number = Convert.ToInt32(Console.ReadLine());
 				Console.WriteLine("By: "); selected.Adress.City = Console.ReadLine();
@@ -225,7 +225,7 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("Kundens fornavn: "); var fornavn = Console.ReadLine();
 				Console.WriteLine("Kundens efternavn: "); var efterNavn = Console.ReadLine();
 				Console.WriteLine("Email: "); var email = Console.ReadLine();
-				Console.WriteLine("Tlf nr: "); var tlfNr = Convert.ToInt32(Console.ReadLine());
+				Console.WriteLine("Tlf nr: "); var tlfNr = Convert.ToString(Console.ReadLine());
 				Console.WriteLine("Adresse: "); var adressen = Console.ReadLine();
 				Console.WriteLine("Adresse nr: "); var adresseNr = Convert.ToInt32(Console.ReadLine());
 				Console.WriteLine("By: "); var by = Console.ReadLine();
