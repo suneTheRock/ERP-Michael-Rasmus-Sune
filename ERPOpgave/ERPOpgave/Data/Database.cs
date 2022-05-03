@@ -101,7 +101,7 @@ namespace ERPOpgave.Data
             }
             
             reader.Close();
-
+            
             return customer;
             //vi skal bruge reader til at læse information 
 
