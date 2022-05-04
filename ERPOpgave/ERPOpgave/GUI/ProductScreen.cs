@@ -158,7 +158,11 @@ namespace ERPOpgave.GUI
             Console.WriteLine("På lager: " + selected.Stock);
             Console.WriteLine("Enhedstype: " + selected.Unittype);
 
+
+			Console.ReadLine();
 			Draw();
+
+			
         }
 
 		public void AddProductToList()

@@ -1,12 +1,10 @@
 ﻿using ERPOpgave.GUI;
 using TECHCOOL.UI;
 
-CompanyMenu titlescreen = new CompanyMenu();
-Screen.Display(titlescreen);
-using ERPOpgave.GUI;
-using TECHCOOL.UI;
+//CompanyMenu titlescreen = new CompanyMenu();
+//Screen.Display(titlescreen);
 
 //TitleScreen titlescreen = new TitleScreen();
 //Screen.Display(titlescreen);
-CustomerScreen titlescreen = new CustomerScreen();
+ProductScreen titlescreen = new ProductScreen();
 Screen.Display(titlescreen);
