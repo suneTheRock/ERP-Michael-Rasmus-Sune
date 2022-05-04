@@ -187,19 +187,19 @@ namespace ERPOpgave.Data
         //Insert Customer
         public static void InsertCustomer(Customer customer)
         {
-            string ScalarEmail = "@email";
+            
             string query1 = @"INSERT INTO Persons(
 	                    firstName,
 	                    lastName,
 	                    email,
 	                    phone)
-	                    values(@firstName, @lastName, "+ScalarEmail+", @phone)";
+	                    values(@firstName, @lastName, @email, @phone)";
             
             SqlCommand cmd1 = new SqlCommand(query1, conn);
 
             cmd1.Parameters.AddWithValue("@firstName", customer.FirstName);
             cmd1.Parameters.AddWithValue("@lastName", customer.LastName);
-            cmd1.Parameters.AddWithValue(ScalarEmail, customer.Email);
+            cmd1.Parameters.AddWithValue("@email", customer.Email);
             cmd1.Parameters.AddWithValue("@phone", customer.Phone);
             try
             {
@@ -227,7 +227,7 @@ namespace ERPOpgave.Data
             cmd2.Parameters.AddWithValue("@zipCode", customer.Adress.ZipCode);
             try
             {
-                cmd2.ExecuteNonQuery();
+               cmd2.ExecuteNonQuery();
                 
             }
             catch (Exception ex)
@@ -250,40 +250,67 @@ namespace ERPOpgave.Data
             }
 
 
+            //string query4 = @"INSERT INTO Customers
+            //       (
+            //        lastOrder,
+            //        person_ID,
+            //        adress_ID,
+            //        contactInfo_ID)
+            //        values(
+            //        @lastOrder,
+            //        (SELECT dbo.persons.personID FROM dbo.Persons where dbo.Persons.email = " + customer.Email + @"),
+            //        (SELECT dbo.Adress.adressID FROM dbo.Adress
+
+            //          where dbo.Adress.city = " + customer.Adress.City + @" AND
+
+            //             dbo.Adress.street = " + customer.Adress.Street + @" AND
+
+            //              dbo.Adress.streetNumber = " + customer.Adress.Number + @" AND
+
+            //              dbo.Adress.zipCode = " + customer.Adress.ZipCode + @"),
+            //        (SELECT dbo.ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = " + customer.ContactInfo.Value + @"));";
+
             string query4 = @"INSERT INTO Customers
-                   (lastOrder,
-                   person_ID,
-                  adress_ID,
-                   contactInfo_ID)
-                   values(
-                   '2022-06-04 00:00:00.000',
-                   (SELECT persons.personID FROM Persons where Persons.email = "+customer.Email+ @"),
-                   (SELECT dbo.Adress.adressID FROM dbo.Adress
+                   (
+                    lastOrder,
+                    person_ID,
+                    adress_ID,
+                    contactInfo_ID)
+                    values(
+                    @lastOrder,
+                    (SELECT dbo.persons.personID FROM dbo.Persons where dbo.Persons.email = "+ customer.Email + @" ),
+                    (SELECT dbo.Adress.adressID FROM dbo.Adress
 
                       where dbo.Adress.city = " + customer.Adress.City + @" AND
 
-                         Adress.street = " + customer.Adress.Street + @" AND
+                         dbo.Adress.street = " + customer.Adress.Street + @" AND
 
-                          Adress.streetNumber = " + customer.Adress.Number + @" AND
+                          dbo.Adress.streetNumber = " + customer.Adress.Number + @" AND
 
-                          zipCode = @zipCode),
-                  (SELECT ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = " + customer.ContactInfo.Value + @"), );";
-            
+                          dbo.Adress.zipCode = " + customer.Adress.ZipCode + @"),
+                    (SELECT dbo.ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = " + customer.ContactInfo.Value + @"));";
+
+
+
+
             SqlCommand cmd4 = new SqlCommand(query4, conn);
-            cmd4.Parameters.AddWithValue("@email", customer.Email);
-            cmd4.Parameters.AddWithValue("@street", customer.Adress.Street);
-            cmd4.Parameters.AddWithValue("@streetNumber", customer.Adress.Number);
-            cmd4.Parameters.AddWithValue("@city", customer.Adress.City);
-            cmd4.Parameters.AddWithValue("@zipCode", customer.Adress.ZipCode);
-            cmd4.Parameters.AddWithValue("@value", customer.ContactInfo.Value);
-           string time = "null";
-            if (customer.LastOrder > DateTime.MinValue)
-            {
-                time = customer.LastOrder.ToString();
-            }
-
             //cmd3.Parameters.AddWithValue("@customers.customerID", customer.CustomerID);
+            cmd4.Parameters.AddWithValue("@lastOrder", customer.LastOrder.Year);
             
+            //cmd4.Parameters.AddWithValue("@email", customer.Email);
+            //cmd4.Parameters.AddWithValue("@street", customer.Adress.Street);
+            //cmd4.Parameters.AddWithValue("@streetNumber", customer.Adress.Number);
+            //cmd4.Parameters.AddWithValue("@city", customer.Adress.City);
+            //cmd4.Parameters.AddWithValue("@zipCode", customer.Adress.ZipCode);
+            //cmd4.Parameters.AddWithValue("@value", customer.ContactInfo.Value);
+            //string time = "null";
+            //if (customer.LastOrder > DateTime.MinValue)
+            //{
+            //    time = customer.LastOrder.ToString();
+            //}
+
+
+
 
 
             try
