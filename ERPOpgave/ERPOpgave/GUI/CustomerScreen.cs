@@ -132,20 +132,9 @@ namespace ERPOpgave.GUI
                 {
 					Clear();
 					Console.WriteLine("Venligst indtast Kundenummer for at finde kunde ");
-					var input = Console.ReadLine();
-					Database.GetCustomerByID(Convert.ToInt32(input));
 					
-					
-
-					getCustomerById();
+					findCustomerById();
                     
-					
-                    
-					
-
-					
-
-
 				}
 				if(info.Key == ConsoleKey.F7)
                 {
@@ -219,12 +208,15 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("Email: " + selected.Email);
 		}
 
-		public void getCustomerById()
+		public void findCustomerById()
         {
+
 			Clear();
 			Console.WriteLine("Kundens Detalje ");
 			Console.WriteLine("																				Tryk F4 for at gå tilbage til Menuen");
 			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
+			var input = Console.ReadLine();
+			Database.GetCustomerByID(Convert.ToInt32(input));
 			Console.WriteLine("Navn: " + selected.FirstName);
 			Console.WriteLine("Efternavn: " + selected.LastName);
 			Console.WriteLine("Adresse: " + selected.Adress.Street);
