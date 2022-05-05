@@ -82,7 +82,7 @@ namespace ERPOpgave.Data
             return p;
         }
 
-        public Product GetAllProducts()
+        public List<Product> GetAllProducts()
         {
             foreach (Product p in productList)
             {
