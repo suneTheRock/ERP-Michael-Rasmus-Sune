@@ -184,6 +184,14 @@ namespace ERPOpgave.Data
             return customers;
         }
 
+        public static int getInsertId()
+        {
+            SqlCommand cmd1 = new SqlCommand("SELECT SCOPE_IDENTITY() ", conn);
+            var reader = cmd1.ExecuteReader();
+
+            return reader.GetInt32(0);
+        }
+
         //Insert Customer
         public static void InsertCustomer(Customer customer)
         {
@@ -194,7 +202,9 @@ namespace ERPOpgave.Data
 	                    email,
 	                    phone)
 	                    values(@firstName, @lastName, @email, @phone)";
-            
+            int personId = 0;
+
+            SqlCommand cmdId = null;
             SqlCommand cmd1 = new SqlCommand(query1, conn);
 
             cmd1.Parameters.AddWithValue("@firstName", customer.FirstName);
@@ -205,6 +215,9 @@ namespace ERPOpgave.Data
             {
                 
                 cmd1.ExecuteNonQuery();
+                cmdId = new SqlCommand("SELECT dbo.persons.personID FROM dbo.Persons where dbo.Persons.email = '" + customer.Email + "' ", conn);
+                
+                personId = (int) cmdId.ExecuteScalar();
 
             }
             catch (Exception ex)
@@ -218,6 +231,7 @@ namespace ERPOpgave.Data
 	                    city,
 	                    zipCode)
 	                    values(@street, @streetNumber, @city, @zipCode)";
+            int adressId = 0;
 
             SqlCommand cmd2 = new SqlCommand(query2, conn);
 
@@ -228,7 +242,16 @@ namespace ERPOpgave.Data
             try
             {
                cmd2.ExecuteNonQuery();
-                
+                cmdId = new SqlCommand(@"(SELECT dbo.Adress.adressID FROM dbo.Adress
+
+                      where dbo.Adress.city = '" + customer.Adress.City + @"' AND
+
+                         dbo.Adress.street = '" + customer.Adress.Street + @"' AND
+
+                          dbo.Adress.streetNumber = '" + customer.Adress.Number + @"' AND
+
+                          dbo.Adress.zipCode = '" + customer.Adress.ZipCode + @"')", conn);
+                adressId = (int)cmdId.ExecuteScalar();
             }
             catch (Exception ex)
             {
@@ -238,17 +261,29 @@ namespace ERPOpgave.Data
             string query3 = @"INSERT INTO ContactInfos
                     (value_)
                     values(@value)";
+            int concactInfoId = 0;
             SqlCommand cmd3 = new SqlCommand(query3, conn);
             cmd3.Parameters.AddWithValue("@value", customer.ContactInfo.Value);
             try
             {
                 cmd3.ExecuteNonQuery();
+                cmdId = new SqlCommand("(SELECT dbo.ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = '" + customer.ContactInfo.Value + @"');", conn);
+                concactInfoId = (int)cmdId.ExecuteScalar();
             }
             catch(Exception ex)
             {
                 Console.Write(ex.Message);
             }
 
+
+            string query4 = @$"INSERT INTO Customers
+                   (
+                    lastOrder,
+                    person_ID,
+                    adress_ID,
+                    contactInfo_ID)
+                    values('2022-06-04 00:00:00.000',{personId},{adressId},{concactInfoId})";
+                    
 
             //string query4 = @"INSERT INTO Customers
             //       (
@@ -258,7 +293,7 @@ namespace ERPOpgave.Data
             //        contactInfo_ID)
             //        values(
             //        @lastOrder,
-            //        (SELECT dbo.persons.personID FROM dbo.Persons where dbo.Persons.email = " + customer.Email + @"),
+            //        (SELECT dbo.persons.personID FROM dbo.Persons where dbo.Persons.email = "+ customer.Email + @" ),
             //        (SELECT dbo.Adress.adressID FROM dbo.Adress
 
             //          where dbo.Adress.city = " + customer.Adress.City + @" AND
@@ -270,32 +305,12 @@ namespace ERPOpgave.Data
             //              dbo.Adress.zipCode = " + customer.Adress.ZipCode + @"),
             //        (SELECT dbo.ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = " + customer.ContactInfo.Value + @"));";
 
-            string query4 = @"INSERT INTO Customers
-                   (
-                    lastOrder,
-                    person_ID,
-                    adress_ID,
-                    contactInfo_ID)
-                    values(
-                    @lastOrder,
-                    (SELECT dbo.persons.personID FROM dbo.Persons where dbo.Persons.email = "+ customer.Email + @" ),
-                    (SELECT dbo.Adress.adressID FROM dbo.Adress
-
-                      where dbo.Adress.city = " + customer.Adress.City + @" AND
-
-                         dbo.Adress.street = " + customer.Adress.Street + @" AND
-
-                          dbo.Adress.streetNumber = " + customer.Adress.Number + @" AND
-
-                          dbo.Adress.zipCode = " + customer.Adress.ZipCode + @"),
-                    (SELECT dbo.ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = " + customer.ContactInfo.Value + @"));";
-
 
 
 
             SqlCommand cmd4 = new SqlCommand(query4, conn);
             //cmd3.Parameters.AddWithValue("@customers.customerID", customer.CustomerID);
-            cmd4.Parameters.AddWithValue("@lastOrder", customer.LastOrder.Year);
+            //cmd4.Parameters.AddWithValue("@lastOrder", customer.LastOrder);
             
             //cmd4.Parameters.AddWithValue("@email", customer.Email);
             //cmd4.Parameters.AddWithValue("@street", customer.Adress.Street);
