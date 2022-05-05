@@ -338,10 +338,12 @@ namespace ERPOpgave.Data
             }
             finally
             {
-                conn.Close();   
+                //conn.Close();   
             }
 
             customers.Add(customer);
+            
+           
         }
 
         //Update Customer by ID

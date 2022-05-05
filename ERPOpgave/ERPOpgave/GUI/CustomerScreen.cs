@@ -55,6 +55,8 @@ namespace ERPOpgave.GUI
 			
 			
 			//We add a Column with (<A title taken from above> , <"The Variablename we gave them in their own class">)
+			listPage = new ListPage<Customer>();
+			listPage.Add(Database.GetAllCustomers());
 			listPage.AddColumn(CustomerNumber, "CustomerID");
 			listPage.AddColumn(Name, "FirstName");
 			listPage.AddColumn(EfterNavn, "LastName");
@@ -70,6 +72,7 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("Tryk på F2 for at oprette en kunde");
 			Console.WriteLine("Tryk på F5 for at kunde detalje");
 			Console.WriteLine("Tryk på F6 for at finde kunde via kundenummer");
+			Console.WriteLine("Tryk på F7 for at slette en eksisterende kunde i systemet");
 			//CustomerScreen customerScreen = new CustomerScreen();
 
 			bool loop = true;
@@ -144,6 +147,10 @@ namespace ERPOpgave.GUI
 
 
 				}
+				if(info.Key == ConsoleKey.F7)
+                {
+					deleteCustomerById();
+                }
 				if(info.Key == ConsoleKey.Escape)
                 {
 					loop = false;
@@ -169,7 +176,6 @@ namespace ERPOpgave.GUI
 
 			try
             {
-				Console.WriteLine("Kundenummer: "); selected.CustomerID = Convert.ToInt32(Console.ReadLine());
 				Console.WriteLine("Kundens fornavn: "); selected.FirstName = Console.ReadLine();
 				Console.WriteLine("Kundens efternavn: "); selected.LastName = Console.ReadLine();
 				Console.WriteLine("Email "); selected.Email = Console.ReadLine();
@@ -255,8 +261,8 @@ namespace ERPOpgave.GUI
 				Adress adr = new Adress(by,adresseNr,adressen, postnummer);
 				ContactInfo contactInfo = new ContactInfo(value);
 				Customer cs = new Customer(fornavn, efterNavn, email, tlfNr, adr, contactInfo);
-				listPage.Add(cs);
 				Database.InsertCustomer(cs);
+				
 				
 				
 				
@@ -266,16 +272,26 @@ namespace ERPOpgave.GUI
             {
 				Console.WriteLine(ex.Message);
             }
-			
+
 			//Screen Prompt:
-			
+
 			// .Add to create a new company
 			//listPage.Add(new Customer(adresse, kontaktInfo, email, fornavn, efterNavn, tlfNr, by, postnummer, kontaktInfo, valuta));
 			//listPage.Add(new Customer(name, companyStreet, companyStreetNumber, postNumber, companyCity, companyCountry, companyCurrency));
 
 			// tilbage til listen
+			Database.GetAllCustomers();
 			Draw();
 
+		}
+
+		public void deleteCustomerById()
+        {
+			Clear();
+			Console.WriteLine("venligst indtaste kundenummer for at slette kunden");
+			Console.ReadLine();
+			Console.WriteLine("																				Tryk F4 for at gå tilbage til Menuen");
+			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
 		}
 
 		
