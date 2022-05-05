@@ -97,7 +97,6 @@ namespace ERPOpgave.Data
                 customer.LastOrder = lastOrder;
                 customer.ContactInfo = contactInfo;
 
-                
             }
             
             reader.Close();
@@ -190,6 +189,38 @@ namespace ERPOpgave.Data
             var reader = cmd1.ExecuteReader();
 
             return reader.GetInt32(0);
+        }
+        public static void DeleteCustomer(int id)
+        {
+            //int customerId = 0;
+            Customer customer;
+            string query1 = "DELETE FROM Customers where customerID = '" + id + "'";
+            
+            SqlCommand cmd1 = new SqlCommand(query1, conn);
+
+            try
+            {
+                cmd1.ExecuteNonQuery();
+                //customerId = (int)cmd1.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            string query2 = "DELETE FROM Persons customerID = '" + id + "'";
+            
+            SqlCommand cmd2 = new SqlCommand(query2, conn);
+
+            try
+            {
+                cmd2.ExecuteNonQuery();
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         //Insert Customer
