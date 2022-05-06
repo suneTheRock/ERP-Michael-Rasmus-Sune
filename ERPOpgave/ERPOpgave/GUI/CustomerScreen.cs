@@ -133,8 +133,8 @@ namespace ERPOpgave.GUI
 					Clear();
 					Console.WriteLine("Venligst indtast Kundenummer for at finde kunde ");
 
-					//findCustomerById();
-					Database.GetCustomerByID(Convert.ToInt32(Console.Read()));
+					findCustomerById();
+					
                     
 				}
 				if(info.Key == ConsoleKey.F7)
@@ -216,15 +216,25 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("Kundens Detalje ");
 			Console.WriteLine("																				Tryk F4 for at gå tilbage til Menuen");
 			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
-			Database.GetCustomerByID(Convert.ToInt32(Console.Read()));
-			Console.WriteLine("Navn: " + selected.FirstName);
-			Console.WriteLine("Efternavn: " + selected.LastName);
-			Console.WriteLine("Adresse: " + selected.Adress.Street);
-			Console.WriteLine("Husnummer: " + selected.Adress.Number);
-			Console.WriteLine("Postnummer: " + selected.Adress.ZipCode);
-			Console.WriteLine("By: " + selected.Adress.City);
-			Console.WriteLine("Telefonnummer: " + selected.Phone);
-			Console.WriteLine("Email: " + selected.Email);
+			var input = Convert.ToInt32(Console.ReadLine());
+			Customer customer = Database.GetCustomerByID(input);
+			try
+            {
+				
+				Console.WriteLine("Navn: " + customer.FirstName);
+				Console.WriteLine("Efternavn: " + customer.LastName);
+				Console.WriteLine("Adresse: " + customer.Adress.Street);
+				Console.WriteLine("Husnummer: " + customer.Adress.Number);
+				Console.WriteLine("Postnummer: " + customer.Adress.ZipCode);
+				Console.WriteLine("By: " + customer.Adress.City);
+				Console.WriteLine("Telefonnummer: " + customer.Phone);
+				Console.WriteLine("Email: " + customer.Email);
+			}
+			catch (NullReferenceException ex)
+			{
+				Console.WriteLine("Indtast venligst den eksisterende kunde i systemet"); 
+			}	
+			
 		}
 
 		public void AddCustomerToList()
