@@ -132,10 +132,19 @@ namespace ERPOpgave.GUI
                 {
 					Clear();
 					Console.WriteLine("Venligst indtast Kundenummer for at finde kunde ");
-
-					findCustomerById();
+					try
+                    {
+						this.findCustomerById();
+					}
+					catch(FormatException)
+                    {
+						Console.WriteLine("Indtast venligst et tal");
+						Console.ReadLine();
+                    }
 					
-                    
+					Clear();
+					Draw();
+					
 				}
 				if(info.Key == ConsoleKey.F7)
                 {
@@ -211,16 +220,22 @@ namespace ERPOpgave.GUI
 
 		public void findCustomerById()
         {
+			
 
 			Clear();
-			Console.WriteLine("Kundens Detalje ");
+			Console.WriteLine("søge kunde via kundenummer");
 			Console.WriteLine("																				Tryk F4 for at gå tilbage til Menuen");
 			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
-			var input = Convert.ToInt32(Console.ReadLine());
-			Customer customer = Database.GetCustomerByID(input);
+			Console.WriteLine("Indtast venligst Kundenummer: ");
+
 			try
             {
-				
+				var input = Convert.ToInt32(Console.ReadLine());
+				Customer customer = Database.GetCustomerByID(input);
+
+
+				Console.WriteLine("Venligst indtast et tal");
+				Console.WriteLine("Kundens Detalje ");
 				Console.WriteLine("Navn: " + customer.FirstName);
 				Console.WriteLine("Efternavn: " + customer.LastName);
 				Console.WriteLine("Adresse: " + customer.Adress.Street);
@@ -230,10 +245,13 @@ namespace ERPOpgave.GUI
 				Console.WriteLine("Telefonnummer: " + customer.Phone);
 				Console.WriteLine("Email: " + customer.Email);
 			}
-			catch (NullReferenceException ex)
-			{
-				Console.WriteLine("Indtast venligst den eksisterende kunde i systemet"); 
-			}	
+			catch (NullReferenceException)
+            {
+				Console.WriteLine("");
+            }
+			
+			
+				
 			
 		}
 
