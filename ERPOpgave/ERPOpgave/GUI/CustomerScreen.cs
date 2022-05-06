@@ -281,7 +281,12 @@ namespace ERPOpgave.GUI
         {
 			Clear();
 			Console.WriteLine("venligst indtaste kundenummer for at slette kunden");
-			Console.ReadLine();
+			Console.WriteLine("Id: ");
+			var input = Convert.ToInt32(Console.ReadLine());
+			Customer customer = Database.GetCustomerByID(input);
+			Database.DeleteCustomer(customer);
+            
+			
 			Console.WriteLine("																				Tryk F4 for at gå tilbage til Menuen");
 			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
 		}

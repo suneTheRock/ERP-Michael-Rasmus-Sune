@@ -190,11 +190,11 @@ namespace ERPOpgave.Data
 
             return reader.GetInt32(0);
         }
-        public static void DeleteCustomer(int id)
+        public static void DeleteCustomer(Customer customer)
         {
             //int customerId = 0;
-            Customer customer;
-            string query1 = "DELETE FROM Customers where customerID = '" + id + "'";
+            
+            string query1 = "DELETE FROM Customers where customerID = '" + customer.CustomerID + "'";
             
             SqlCommand cmd1 = new SqlCommand(query1, conn);
 
@@ -208,19 +208,53 @@ namespace ERPOpgave.Data
                 Console.WriteLine(ex.Message);
             }
 
-            string query2 = "DELETE FROM Persons customerID = '" + id + "'";
+            //string query2 = "DELETE FROM ContactInfos where contactInfoID = '" + id + "'";
             
-            SqlCommand cmd2 = new SqlCommand(query2, conn);
+            //SqlCommand cmd2 = new SqlCommand(query2, conn);
 
-            try
-            {
-                cmd2.ExecuteNonQuery();
+            //try
+            //{
+            //    cmd2.ExecuteNonQuery();
                 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
+
+            //string query3 = "DELETE FROM Adress where adressID = '" + id + "'";
+
+            //SqlCommand cmd3 = new SqlCommand(query3, conn);
+
+            //try
+            //{
+            //    cmd3.ExecuteNonQuery();
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
+
+            //string query4 = "DELETE FROM Persons where personID = '" + id + "'";
+
+            //SqlCommand cmd4 = new SqlCommand(query4, conn);
+
+            //try
+            //{
+            //    cmd4.ExecuteNonQuery();
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
+
+            //finally
+            //{
+            //    //conn.Close();
+            //}
+            customers.Remove(customer);
         }
 
         //Insert Customer
