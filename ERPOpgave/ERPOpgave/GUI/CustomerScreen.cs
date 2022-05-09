@@ -142,8 +142,8 @@ namespace ERPOpgave.GUI
 						Console.ReadLine();
                     }
 					
-					Clear();
-					Draw();
+					//Clear();
+					//Draw();
 					
 				}
 				if(info.Key == ConsoleKey.F7)
