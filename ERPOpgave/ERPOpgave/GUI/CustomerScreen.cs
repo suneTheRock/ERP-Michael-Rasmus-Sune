@@ -140,6 +140,7 @@ namespace ERPOpgave.GUI
                     {
 						Console.WriteLine("Indtast venligst et tal");
 						Console.ReadLine();
+						this.findCustomerById();
                     }
 					
 					//Clear();
@@ -228,10 +229,13 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
 			Console.WriteLine("Indtast venligst Kundenummer: ");
 
+			var input = Convert.ToInt32(Console.ReadLine());
+			Customer customer = Database.GetCustomerByID(input);
+
 			try
             {
-				var input = Convert.ToInt32(Console.ReadLine());
-				Customer customer = Database.GetCustomerByID(input);
+				//var input = Convert.ToInt32(Console.ReadLine());
+				//Customer customer = Database.GetCustomerByID(input);
 
 				Console.WriteLine("Kundens Detalje ");
 				Console.WriteLine("Navn: " + customer.FirstName);
@@ -245,7 +249,9 @@ namespace ERPOpgave.GUI
 			}
 			catch (NullReferenceException)
             {
-				Console.WriteLine("Indtastet kundenummer eksisterer ikke i systemet"); ;
+				Console.WriteLine("Indtastet kundenummer eksisterer ikke i systemet"); 
+				Console.ReadLine();
+				this.findCustomerById();
             }
 			
 			
