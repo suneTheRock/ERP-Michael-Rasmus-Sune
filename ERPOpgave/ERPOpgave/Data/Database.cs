@@ -58,8 +58,6 @@ namespace ERPOpgave.Data
                 JOIN[H1PD021122_Gruppe2].[dbo].[ContactInfos]
                 ON Customers.contactInfo_ID = ContactInfos.contactInfoID
 
-
-                
                 WHERE Customers.customerID =" + i;
                 
             SqlDataReader reader = sql.ExecuteReader();
@@ -96,7 +94,6 @@ namespace ERPOpgave.Data
                 customer.CustomerID = customId;
                 customer.LastOrder = lastOrder;
                 customer.ContactInfo = contactInfo;
-
             }
             
             reader.Close();
@@ -182,7 +179,6 @@ namespace ERPOpgave.Data
             reader.Close();
             return customers;
         }
-
         public static int getInsertId()
         {
             SqlCommand cmd1 = new SqlCommand("SELECT SCOPE_IDENTITY() ", conn);
@@ -278,7 +274,6 @@ namespace ERPOpgave.Data
             cmd1.Parameters.AddWithValue("@phone", customer.Phone);
             try
             {
-                
                 cmd1.ExecuteNonQuery();
                 cmdId = new SqlCommand("SELECT dbo.persons.personID FROM dbo.Persons where dbo.Persons.email = '" + customer.Email + "' ", conn);
                 
@@ -340,7 +335,6 @@ namespace ERPOpgave.Data
                 Console.Write(ex.Message);
             }
 
-
             string query4 = @$"INSERT INTO Customers
                    (
                     lastOrder,
@@ -370,9 +364,6 @@ namespace ERPOpgave.Data
             //              dbo.Adress.zipCode = " + customer.Adress.ZipCode + @"),
             //        (SELECT dbo.ContactInfos.contactInfoID FROM ContactInfos where ContactInfos.value_ = " + customer.ContactInfo.Value + @"));";
 
-
-
-
             SqlCommand cmd4 = new SqlCommand(query4, conn);
             //cmd3.Parameters.AddWithValue("@customers.customerID", customer.CustomerID);
             //cmd4.Parameters.AddWithValue("@lastOrder", customer.LastOrder);
@@ -389,10 +380,6 @@ namespace ERPOpgave.Data
             //    time = customer.LastOrder.ToString();
             //}
 
-
-
-
-
             try
             {   
                 cmd4.ExecuteNonQuery();
@@ -407,8 +394,6 @@ namespace ERPOpgave.Data
             }
 
             customers.Add(customer);
-            
-           
         }
 
         //Update Customer by ID
@@ -436,7 +421,5 @@ namespace ERPOpgave.Data
             }
             throw new Exception("No Customer by that ID");
         }
-
-        
     }
 }

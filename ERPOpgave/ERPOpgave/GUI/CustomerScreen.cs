@@ -156,7 +156,7 @@ namespace ERPOpgave.GUI
 					catch(FormatException)
                     {
 						Console.WriteLine("Venligst indtaste et tal");
-						Console.ReadLine ();
+						Console.ReadLine();
 						this.deleteCustomerById();
                     }
 
@@ -265,9 +265,6 @@ namespace ERPOpgave.GUI
 				this.findCustomerById();
             }
 			
-			
-				
-			
 		}
 
 		public void AddCustomerToList()
@@ -298,10 +295,6 @@ namespace ERPOpgave.GUI
 				Customer cs = new Customer(fornavn, efterNavn, email, tlfNr, adr, contactInfo);
 				Database.InsertCustomer(cs);
 				
-				
-				
-				
-
 			}
 			catch (Exception ex)
             {
@@ -339,15 +332,10 @@ namespace ERPOpgave.GUI
 				this.deleteCustomerById();
             }
 			
-            
-			
 			Console.WriteLine("																				Tryk F4 for at gå tilbage til Menuen");
 			Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
 		}
 
-		
 	}
 
-		
-	
 }
