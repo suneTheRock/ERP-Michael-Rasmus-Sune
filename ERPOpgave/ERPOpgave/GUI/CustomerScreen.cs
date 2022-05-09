@@ -149,7 +149,18 @@ namespace ERPOpgave.GUI
 				}
 				if(info.Key == ConsoleKey.F7)
                 {
-					deleteCustomerById();
+					try
+                    {
+						deleteCustomerById();
+					}
+					catch(FormatException)
+                    {
+						Console.WriteLine("Venligst indtaste et tal");
+						Console.ReadLine ();
+						this.deleteCustomerById();
+                    }
+
+					
                 }
 				if(info.Key == ConsoleKey.Escape)
                 {
@@ -315,8 +326,19 @@ namespace ERPOpgave.GUI
 			Console.WriteLine("venligst indtaste kundenummer for at slette kunden");
 			Console.WriteLine("Id: ");
 			var input = Convert.ToInt32(Console.ReadLine());
-			Customer customer = Database.GetCustomerByID(input);
-			Database.DeleteCustomer(customer);
+			try
+            {
+				Customer customer = Database.GetCustomerByID(input);
+				Database.DeleteCustomer(customer);
+			}
+			catch(NullReferenceException)
+            {
+				Console.WriteLine("Kundenummer findes ikke i systemet");
+				Console.WriteLine("Venligst indtaste eksisterende kundenummer");
+				Console.ReadLine();
+				this.deleteCustomerById();
+            }
+			
             
 			
 			Console.WriteLine("																				Tryk F4 for at gå tilbage til Menuen");
