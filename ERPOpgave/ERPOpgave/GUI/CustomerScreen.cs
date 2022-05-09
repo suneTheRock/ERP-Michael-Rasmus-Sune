@@ -233,8 +233,6 @@ namespace ERPOpgave.GUI
 				var input = Convert.ToInt32(Console.ReadLine());
 				Customer customer = Database.GetCustomerByID(input);
 
-
-				Console.WriteLine("Venligst indtast et tal");
 				Console.WriteLine("Kundens Detalje ");
 				Console.WriteLine("Navn: " + customer.FirstName);
 				Console.WriteLine("Efternavn: " + customer.LastName);
@@ -247,7 +245,7 @@ namespace ERPOpgave.GUI
 			}
 			catch (NullReferenceException)
             {
-				Console.WriteLine("");
+				Console.WriteLine("Indtastet kundenummer eksisterer ikke i systemet"); ;
             }
 			
 			
