@@ -8,8 +8,15 @@ namespace ERPOpgave.PersonalInfo
 {
     public class ContactInfo
     {
-        public int ContactInfoID { get => default; set { } }
+        public int ContactInfoID { get; set; }
 
-        public int Value { get => default; set { } }
+        public int Value { get; set; }
+
+        public ContactInfo(int value)
+        {
+            this.Value = value;  
+        }
     }
+
+    
 }

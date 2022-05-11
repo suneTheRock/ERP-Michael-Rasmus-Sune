@@ -9,7 +9,7 @@ namespace ERPOpgave.Models
 {
     public class Person
     {
-        public Person(string email, string firstName, string lastName, int phone)
+        public Person(string email, string firstName, string lastName, string phone)
         {
             this.Email = email;
             this.FirstName = firstName;
@@ -17,7 +17,7 @@ namespace ERPOpgave.Models
             this.LastName = lastName;
             this.Phone = phone;
         }
-        public Person(Adress adress, ContactInfo contactInfo, string email, string firstName, string lastName, int phone)
+        public Person(Adress adress, ContactInfo contactInfo, string email, string firstName, string lastName, string phone)
         {
             this.Adress = adress;
             this.ContactInfo = contactInfo;
@@ -26,6 +26,11 @@ namespace ERPOpgave.Models
             this.FullName = $"{firstName} {lastName}";
             this.LastName = lastName;
             this.Phone = phone;
+        }
+
+        public Person()
+        {
+
         }
 
         internal PersonalInfo.Adress Adress { get; set; }
@@ -40,6 +45,6 @@ namespace ERPOpgave.Models
 
         public string LastName { get; set; }
 
-        public int Phone { get; set; }
+        public string Phone { get; set; }
     }
 }
