@@ -147,7 +147,7 @@ namespace ERPOpgave.GUI
             selected = listPage.Select();
             Clear();
             Console.WriteLine("Produktets detaljer");
-            Console.WriteLine("																				Tryk Esc + Enter for at gå tilbage til Menuen");
+            Console.WriteLine("																				Tryk Enter for at gå tilbage til Menuen");
             Console.WriteLine("-------------------------------------------------------------------------------------------------------------------");
             Console.WriteLine("Produkt ID: " + selected.ProductId);
             Console.WriteLine("Navn: " + selected.Name);
