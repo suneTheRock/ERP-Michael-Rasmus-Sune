@@ -17,13 +17,13 @@ namespace ERPOpgave.Data
     public static partial class Database
     {
         public Product p;
-        public List<Product> productList = new List<Product>();
-        public List<SalesOrder> orderList = new List<SalesOrder>();
+        public static List<Product> productList = new List<Product>();
+        public static List<SalesOrder> orderList = new List<SalesOrder>();
 
         /// <summary>
         /// TEMPOARY
-        public Customer c;
-        public List<Customer> customerList = new List<Customer>();
+        public static Customer c;
+        public static List<Customer> customerList = new List<Customer>();
         /// </summary>
 
         public static Database Instance { get; private set; }
