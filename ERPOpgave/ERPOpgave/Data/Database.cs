@@ -19,16 +19,16 @@ namespace ERPOpgave.Data
     public static partial class Database
     {
 
-        List<Customer> customers = new List<Customer>();
+        static List<Customer> customers = new List<Customer>();
 
-        public Product p;
+        public static Product p;
         public static List<Product> productList = new List<Product>();
         public static List<SalesOrder> orderList = new List<SalesOrder>();
 
->>>>>>>>> Temporary merge branch 2
+
         public static Database Instance { get; private set; }
 
-        SqlConnection conn = null;
+        static SqlConnection conn = null;
         static  Database() 
         {
             //Instance = new Database();
