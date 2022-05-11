@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERPOpgave.Products
+namespace ERPOpgave.Models
 {
     public class Product
     {
@@ -15,9 +15,9 @@ namespace ERPOpgave.Products
             Hours,
             Meters
         }
-        public Product(int itemNumber, string name, string description, decimal costprice, decimal salesprice, string location, decimal stock, UnitType unittype)
+        public Product(int productId, string name, string description, decimal costprice, decimal salesprice, string location, decimal stock, UnitType unittype)
         {
-            ItemNumber = itemNumber;
+            ProductId = productId;
             Name = name;
             Description = description;
             Costprice = costprice;
@@ -27,20 +27,7 @@ namespace ERPOpgave.Products
             Unittype = unittype;
             ProfitMarginPct = GetProfitMarginPct();
             ProfitMargin =GetProfitMargin();
-        }
-        public Product(int productId, int costprice, string description, int itemNumber, string location, string name, int profitMargin, int profitMarginPct, int salesprice, decimal stock, int unit, UnitType unitType)
-        {
-            ProductId = productId;
-            Costprice = costprice;
-            Description = description;
-            ItemNumber = itemNumber;
-            Location = location;
-            Name = name;
-            ProfitMargin = profitMargin;
-            ProfitMarginPct = profitMarginPct;
-            Salesprice = salesprice;
-            Stock = stock;
-            Unittype = unitType;
+            tempBeans = Math.Round(GetProfitMarginPct(),2).ToString() + "%";
 
             if (location.Length > 4)
             {
@@ -48,6 +35,26 @@ namespace ERPOpgave.Products
                 throw new Exception("Location must be less than 4 characters long.");
             }
         }
+        //public Product(int productId, int costprice, string description, int itemNumber, string location, string name, int profitMargin, int profitMarginPct, int salesprice, decimal stock, int unit, UnitType unitType)
+        //{
+        //    ProductId = productId;
+        //    Costprice = costprice;
+        //    Description = description;
+        //    ItemNumber = itemNumber;
+        //    Location = location;
+        //    Name = name;
+        //    ProfitMargin = profitMargin;
+        //    ProfitMarginPct = profitMarginPct;
+        //    Salesprice = salesprice;
+        //    Stock = stock;
+        //    Unittype = unitType;
+
+        //    if (location.Length > 4)
+        //    {
+        //        //Kaster en Exception tilbage hvis hyldenummer er over 4 numre.
+        //        throw new Exception("Location must be less than 4 characters long.");
+        //    }
+        //}
         private UnitType localUnitType;
         public int ProductId { get; set; }
         public decimal Costprice { get; set; }
@@ -60,6 +67,7 @@ namespace ERPOpgave.Products
         public decimal Salesprice { get; set; }
         public decimal Stock { get; set; }
         public UnitType Unittype { get; set; }
+        public string tempBeans  { get; set; }
 
         public decimal GetProfitMargin()
         {

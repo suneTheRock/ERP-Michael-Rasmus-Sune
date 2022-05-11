@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ERPOpgave.Models;
 using ERPOpgave.Products;
 using ERPOpgave.Order;
 using ERPOpgave.Models;
@@ -12,20 +13,19 @@ using System.Data;
 using ERPOpgave.PersonalInfo;
 
 
+
 namespace ERPOpgave.Data
 {
     public static partial class Database
     {
+
+        List<Customer> customers = new List<Customer>();
+
         public Product p;
         public static List<Product> productList = new List<Product>();
         public static List<SalesOrder> orderList = new List<SalesOrder>();
 
-        /// <summary>
-        /// TEMPOARY
-        public static Customer c;
-        public static List<Customer> customerList = new List<Customer>();
-        /// </summary>
-
+>>>>>>>>> Temporary merge branch 2
         public static Database Instance { get; private set; }
 
         SqlConnection conn = null;
@@ -431,6 +431,8 @@ namespace ERPOpgave.Data
             }
             throw new Exception("No Customer by that ID");
         }
+=========
+
         public Product GetProductById(int id)
         {
             foreach (Product p in productList)
@@ -502,5 +504,7 @@ namespace ERPOpgave.Data
                 }
             }
         }
+
+>>>>>>>>> Temporary merge branch 2
     }
 }
